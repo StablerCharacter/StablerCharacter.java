@@ -1,0 +1,15 @@
+{
+	"chapters": [
+		{
+			"branches": {
+				"main": {
+					"dialogs": [
+						{
+							"message": "Hello, world!"
+						}
+					]
+				}
+			}
+		}
+	]
+}
