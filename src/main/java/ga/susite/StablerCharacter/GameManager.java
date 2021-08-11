@@ -31,9 +31,9 @@ public class GameManager extends SceneManager {
 	
 	public void start(Point windowResolution) {
 		FastJEngine.init(gameName, this);
-		// FastJEngine.configureWindowResolution(windowResolution);
-		// FastJEngine.configureInternalResolution(windowResolution);
-		FastJEngine.configureDebugging(true);
+		FastJEngine.configureWindowResolution(windowResolution);
+		FastJEngine.configureInternalResolution(windowResolution);
+		// FastJEngine.configureDebugging(true);
 		FastJEngine.run();
 	}
 	
@@ -49,16 +49,11 @@ public class GameManager extends SceneManager {
 			display.modifyRenderSettings(RenderSettings.Antialiasing.Enable);
 		}
 		
-		// display.getJFrame().setResizable(false);
+		display.getJFrame().setResizable(false);
 		
 		GameScene gameScene = new GameScene("Game scene", dialogTextInfo.font, dialogTextInfo);
 		this.addScene(gameScene);
 		this.setCurrentScene(gameScene);
 		this.loadCurrentScene();
-	}
-
-	@Override
-	public void update(Display display) {
-		// TODO Auto-generated method stub
 	}
 }
