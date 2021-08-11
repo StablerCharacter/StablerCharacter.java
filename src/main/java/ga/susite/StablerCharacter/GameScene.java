@@ -1,8 +1,11 @@
 package ga.susite.StablerCharacter;
 
+import tech.fastj.engine.FastJEngine;
 import tech.fastj.graphics.display.Display;
 import tech.fastj.graphics.game.Text2D;
 import tech.fastj.graphics.ui.elements.Button;
+import tech.fastj.input.keyboard.Keyboard;
+import tech.fastj.input.keyboard.Keys;
 import tech.fastj.math.Point;
 import tech.fastj.math.Pointf;
 import tech.fastj.systems.control.Scene;
@@ -31,8 +34,7 @@ public class GameScene extends Scene {
     		.setFill(Color.GRAY)
     		.setTranslation(new Pointf(displayRes.x - 125, displayRes.y - 50));
     	
-    	Text2D dialogText = dialogTextInfo.build("Hello, world!");
-		dialogText.translate(display.getScreenCenter());
+    	Text2D dialogText = dialogTextInfo.build("Hello, world!", display.getScreenCenter());
 		drawableManager.addGameObject(dialogText);
     }
 
@@ -43,5 +45,21 @@ public class GameScene extends Scene {
 
     @Override
     public void update(Display display) {
+        FastJEngine.log("hello from update");
+        if (Keyboard.isKeyDown(Keys.W)) {
+            FastJEngine.log("W key is held down");
+        }
+
+        if (Keyboard.isKeyRecentlyPressed(Keys.W)) {
+            FastJEngine.log("W key was pressed");
+        }
+
+        if (Keyboard.isKeyRecentlyReleased(Keys.W)) {
+            FastJEngine.log("W key was released");
+        }
+
+        if ("W".equals(Keyboard.getLastKeyPressed())) {
+            FastJEngine.log("Last key pressed was W");
+        }
     }
 }

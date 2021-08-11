@@ -17,7 +17,7 @@
 @if "%DEBUG%" == "" @echo off
 @rem ##########################################################################
 @rem
-@rem  FastJ Java Template startup script for Windows
+@rem  StablerCharacter-java startup script for Windows
 @rem
 @rem ##########################################################################
 
@@ -32,7 +32,7 @@ set APP_HOME=%DIRNAME%..
 @rem Resolve any "." and ".." in APP_HOME to make it shorter.
 for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
 
-@rem Add default JVM options here. You can also use JAVA_OPTS and FAST_J_JAVA_TEMPLATE_OPTS to pass JVM options to this script.
+@rem Add default JVM options here. You can also use JAVA_OPTS and STABLER_CHARACTER_JAVA_OPTS to pass JVM options to this script.
 set DEFAULT_JVM_OPTS=
 
 @rem Find java.exe
@@ -68,19 +68,19 @@ goto fail
 @rem Setup the command line
 
 set CLASSPATH=
-set MODULE_PATH=%APP_HOME%\lib\FastJ Java Template-0.0.1.jar;%APP_HOME%\lib\fastj-library-1.5.0-SNAPSHOT.jar
+set MODULE_PATH=%APP_HOME%\lib\StablerCharacter-java-0.0.1.jar;%APP_HOME%\lib\FastJ-561ec83fa2.jar;%APP_HOME%\lib\gson-2.8.7.jar;%APP_HOME%\lib\slf4j-simple-2.0.0-alpha3.jar;%APP_HOME%\lib\slf4j-api-2.0.0-alpha3.jar
 
-@rem Execute FastJ Java Template
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FAST_J_JAVA_TEMPLATE_OPTS%  -classpath "%CLASSPATH%" --module-path "%MODULE_PATH%" --module fastj.templategame/tech.fastj.template.Game %*
+@rem Execute StablerCharacter-java
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %STABLER_CHARACTER_JAVA_OPTS%  -classpath "%CLASSPATH%" --module-path "%MODULE_PATH%" --module ga.susite.StablerCharacter/ga.susite.StablerCharacter.Game %*
 
 :end
 @rem End local scope for the variables with windows NT shell
 if "%ERRORLEVEL%"=="0" goto mainEnd
 
 :fail
-rem Set variable FAST_J_JAVA_TEMPLATE_EXIT_CONSOLE if you need the _script_ return code instead of
+rem Set variable STABLER_CHARACTER_JAVA_EXIT_CONSOLE if you need the _script_ return code instead of
 rem the _cmd.exe /c_ return code!
-if  not "" == "%FAST_J_JAVA_TEMPLATE_EXIT_CONSOLE%" exit 1
+if  not "" == "%STABLER_CHARACTER_JAVA_EXIT_CONSOLE%" exit 1
 exit /b 1
 
 :mainEnd

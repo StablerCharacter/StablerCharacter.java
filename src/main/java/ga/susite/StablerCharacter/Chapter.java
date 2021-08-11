@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class Chapter {
+	public String name;
+	public String description;
 	HashMap<String, Branch> branches;
 	String currentBranchName;
-	String name;
-	String description;
 	
 	Chapter() {}
 	

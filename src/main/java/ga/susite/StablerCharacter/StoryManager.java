@@ -34,6 +34,7 @@ public class StoryManager {
 		}
 	}
 	
+	@Deprecated
 	public static StoryManager loadFromFile(String filePath) throws IOException {
 		Gson gson = new Gson();
 		return gson.fromJson(Files.readString(Paths.get(filePath), StandardCharsets.UTF_8), StoryManager.class);

@@ -1,8 +1,8 @@
 package ga.susite.StablerCharacter;
 
 public class Dialog {
-	String message = "";
-	Event event = null;
+	public String message = "";
+	public Event event = null;
 	
 	Dialog() {}
 	

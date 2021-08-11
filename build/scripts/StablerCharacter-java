@@ -18,7 +18,7 @@
 
 ##############################################################################
 ##
-##  FastJ Java Template start up script for UN*X
+##  StablerCharacter-java start up script for UN*X
 ##
 ##############################################################################
 
@@ -40,10 +40,10 @@ cd "`dirname \"$PRG\"`/.." >/dev/null
 APP_HOME="`pwd -P`"
 cd "$SAVED" >/dev/null
 
-APP_NAME="FastJ Java Template"
+APP_NAME="StablerCharacter-java"
 APP_BASE_NAME=`basename "$0"`
 
-# Add default JVM options here. You can also use JAVA_OPTS and FAST_J_JAVA_TEMPLATE_OPTS to pass JVM options to this script.
+# Add default JVM options here. You can also use JAVA_OPTS and STABLER_CHARACTER_JAVA_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
@@ -81,7 +81,7 @@ case "`uname`" in
 esac
 
 CLASSPATH="\\\"\\\""
-MODULE_PATH=$APP_HOME/lib/FastJ Java Template-0.0.1.jar:$APP_HOME/lib/fastj-library-1.5.0-SNAPSHOT.jar
+MODULE_PATH=$APP_HOME/lib/StablerCharacter-java-0.0.1.jar:$APP_HOME/lib/FastJ-561ec83fa2.jar:$APP_HOME/lib/gson-2.8.7.jar:$APP_HOME/lib/slf4j-simple-2.0.0-alpha3.jar:$APP_HOME/lib/slf4j-api-2.0.0-alpha3.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -180,6 +180,6 @@ save () {
 APP_ARGS=`save "$@"`
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $FAST_J_JAVA_TEMPLATE_OPTS -classpath "\"$CLASSPATH\"" --module-path "\"$MODULE_PATH\"" --module fastj.templategame/tech.fastj.template.Game "$APP_ARGS"
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $STABLER_CHARACTER_JAVA_OPTS -classpath "\"$CLASSPATH\"" --module-path "\"$MODULE_PATH\"" --module ga.susite.StablerCharacter/ga.susite.StablerCharacter.Game "$APP_ARGS"
 
 exec "$JAVACMD" "$@"
