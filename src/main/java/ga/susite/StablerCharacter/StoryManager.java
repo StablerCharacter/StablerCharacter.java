@@ -16,6 +16,10 @@ public class StoryManager {
 	StoryManager(Chapter[] nChapters) {
 		chapters = nChapters;
 	}
+
+	public Dialog getCurrentDialog() {
+		return chapters[chapterIndex].getCurrentDialog();
+	}
 	
 	public Dialog getNext() {
 		chapters[chapterIndex].advanceDialog();

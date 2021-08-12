@@ -7,7 +7,7 @@ public class Chapter {
 	public String name;
 	public String description;
 	HashMap<String, Branch> branches;
-	String currentBranchName;
+	String currentBranchName = "main";
 	
 	Chapter() {}
 	

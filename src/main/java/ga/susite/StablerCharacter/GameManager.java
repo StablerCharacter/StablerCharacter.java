@@ -51,7 +51,7 @@ public class GameManager extends SceneManager {
 		
 		display.getJFrame().setResizable(false);
 		
-		GameScene gameScene = new GameScene("Game scene", dialogTextInfo.font, dialogTextInfo);
+		GameScene gameScene = new GameScene("Game scene", dialogTextInfo.font, dialogTextInfo, story);
 		this.addScene(gameScene);
 		this.setCurrentScene(gameScene);
 		this.loadCurrentScene();

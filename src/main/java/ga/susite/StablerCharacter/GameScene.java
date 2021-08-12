@@ -17,11 +17,21 @@ import java.awt.Font;
 public class GameScene extends Scene {
 	Font mainFont;
 	TextInfo dialogTextInfo;
+    Text2D dialogText;
+    StoryManager story;
 	
-	public GameScene(String name, Font nMainFont, TextInfo nDialogTextInfo) {
+	public GameScene(String name, Font nMainFont, TextInfo nDialogTextInfo, StoryManager nStory) {
         super(name);
         mainFont = nMainFont;
         dialogTextInfo = nDialogTextInfo;
+        story = nStory;
+    }
+
+    void nextDialog() {
+        Dialog dialog = story.getNext();
+        FastJEngine.log(dialog.message);
+        dialogText.setText(dialog.message);
+        if(dialog.event != null) dialog.event.onActionTriggered();
     }
 
     @Override
@@ -33,10 +43,12 @@ public class GameScene extends Scene {
     		.setFont(mainFont)
     		.setText("Next")
     		.setFill(Color.GRAY)
-            .addOnAction(event -> FastJEngine.log("it's working"))
+            .addOnAction(event -> nextDialog())
             .translate(new Pointf(displayRes.x - 125, displayRes.y - 50));
 
-    	Text2D dialogText = dialogTextInfo.build("Hello, world!", display.getScreenCenter());
+        Dialog firstDialog = story.getCurrentDialog();
+    	dialogText = dialogTextInfo.build(firstDialog.message, display.getScreenCenter());
+        if(firstDialog.event != null) firstDialog.event.onActionTriggered();
 		drawableManager.addGameObject(dialogText);
     }
 
