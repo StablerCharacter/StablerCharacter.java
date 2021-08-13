@@ -46,7 +46,7 @@ repositories.mavenCentral()
 
 /* The dependency for FastJ, the game engine this template depends on. */
 dependencies {
-	implementation 'com.github.fastjengine:FastJ:561ec83fa2'
+	implementation 'com.github.fastjengine:FastJ:3321b259db'
 	implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha3'
 }

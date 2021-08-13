@@ -7,9 +7,9 @@ import tech.fastj.graphics.game.Text2D;
 import tech.fastj.math.Pointf;
 
 public class TextInfo {
-	Color color;
-	Font font;
-	Pointf textPos;
+	public Color color;
+	public Font font;
+	public Pointf textPos;
 	
 	TextInfo(Color nColor, Font nFont) {
 		color = nColor;
@@ -34,6 +34,10 @@ public class TextInfo {
 		if(textPos != null) {
 			text.translate(textPos);
 		} else {
+			Pointf[] bounds = text.getBounds();
+			// Subtract the screen center with the half of the width of the text
+			// width = TopRight - TopLeft
+			screenCenter.x -= (bounds[1].x - bounds[0].x) / 2;
 			text.translate(screenCenter);
 		}
 		return text;
