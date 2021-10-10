@@ -1,8 +1,9 @@
 package ga.susite.StablerCharacter;
 
 import java.io.IOException;
-import java.util.HashMap;
 
+import ga.susite.StablerCharacter.utils.EventArgs;
+import ga.susite.StablerCharacter.utils.MarkdownParser;
 import tech.fastj.math.Point;
 
 public class Game {
@@ -18,15 +19,22 @@ public class Game {
 		StoryManager story = null;
 		try {
 			// story = StoryManager.loadFromFile("D:\\eclipse-workspace\\StablerCharacter-java\\src\\main\\java\\ga\\susite\\StablerCharacter\\sampleStory.json");
-			story = MarkdownParser.parseFile("D:\\eclipse-workspace\\StablerCharacter-java\\src\\main\\java\\ga\\susite\\StablerCharacter\\sampleMarkdown.md");
+			MarkdownParser markdownParser = new MarkdownParser();
+			story = markdownParser.parseFile("D:\\eclipse-workspace\\StablerCharacter-java\\src\\main\\java\\ga\\susite\\StablerCharacter\\sampleMarkdown.md");
 			story.printStoryTree();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
-		GameManager gm = GameManager.init("h game", story);
+		Game instance = new Game();
+		GameManager gm = GameManager.init("StablerCharacter.java", story);
 		gm.antiAliasing = true;
 		gm.newChapterScreen = false;
+		gm.onStoryEnd.addEventListener(instance::onStoryEnd);
 		gm.start(new Point(800, 600));
+	}
+	
+	Void onStoryEnd(EventArgs<EventData> e) {
+		return null;
 	}
 }

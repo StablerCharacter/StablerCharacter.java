@@ -4,9 +4,9 @@ public class Branch {
 	Dialog[] dialogs;
 	int dialogIndex = 0;
 	
-	Branch() {}
+	public Branch() {}
 	
-	Branch(Dialog[] nDialogs) {
+	public Branch(Dialog[] nDialogs) {
 		dialogs = nDialogs;
 	}
 	
@@ -16,6 +16,10 @@ public class Branch {
 	
 	public Dialog getCurrentDialog() {
 		return dialogs[dialogIndex];
+	}
+	
+	public void setDialogIndex(int index) {
+		dialogIndex = index;
 	}
 	
 	public void printBranchTree() {

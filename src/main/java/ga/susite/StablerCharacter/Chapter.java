@@ -6,29 +6,31 @@ import java.util.Map.Entry;
 public class Chapter {
 	public String name;
 	public String description;
+	public String currentBranchName = "main";
 	HashMap<String, Branch> branches;
-	String currentBranchName = "main";
 	
-	Chapter() {}
+	public Chapter() {}
 	
-	Chapter(HashMap<String, Branch> nBranches, String nName, String nDescription) {
+	public Chapter(HashMap<String, Branch> nBranches, String nName, String nDescription) {
 		branches = nBranches;
 		name = nName;
 		description = nDescription;
 	}
 
 	public Dialog getCurrentDialog() {
-		// TODO Auto-generated method stub
 		return branches.get(currentBranchName).getCurrentDialog();
 	}
 
 	public void advanceDialog() {
-		// TODO Auto-generated method stub
 		branches.get(currentBranchName).advanceDialogIndex();
 	}
 	
 	public void changeBranch(String nBranch) {
 		currentBranchName = nBranch;
+	}
+	
+	public void setDialogIndex(int index) {
+		branches.get(currentBranchName).setDialogIndex(index);
 	}
 	
 	/*

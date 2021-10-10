@@ -6,7 +6,7 @@ public class Dialog {
 	
 	Dialog() {}
 	
-	Dialog(String nMessage) {
+	public Dialog(String nMessage) {
 		message = nMessage;
 	}
 	

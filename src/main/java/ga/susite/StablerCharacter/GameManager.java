@@ -1,21 +1,28 @@
 package ga.susite.StablerCharacter;
 
-import java.awt.Color;
-import java.awt.Font;
-
 import tech.fastj.engine.FastJEngine;
 import tech.fastj.graphics.display.Display;
 import tech.fastj.graphics.display.RenderSettings;
 import tech.fastj.math.Point;
 import tech.fastj.systems.control.SceneManager;
 
+import ga.susite.StablerCharacter.utils.Event;
+import ga.susite.StablerCharacter.utils.EventArgs;
+
 public class GameManager extends SceneManager {
 	public String gameName;
 	public boolean antiAliasing = true; // a Boolean to indicate to Enable Anti-aliasing or not.
 	public boolean newChapterScreen = false; // a Boolean to indicate to Enable the New chapter screen or not.
 	public StoryManager story;
-	public TextInfo dialogTextInfo = new TextInfo(Color.BLACK, new Font("Segoe UI", Font.PLAIN, 16));
-	private static GameManager gm;
+	public TextInfo dialogTextInfo = new TextInfo();
+	
+	// - Events -
+	public Event<Void> onInit = new Event<Void>();
+	public Event<EventData> onUpdate = new Event<EventData>();
+	public Event<EventData> onStoryEnd = new Event<EventData>();
+	public Event<EventData> onStoryStart = new Event<EventData>();
+	
+	private static GameManager instance;
 	
 	/**
 	 * Instantiate the Game manager class.
@@ -38,13 +45,12 @@ public class GameManager extends SceneManager {
 	}
 	
 	public static GameManager init(String nGameName, StoryManager nStory) {
-		gm = new GameManager(nGameName, nStory);
-		return gm;
+		instance = new GameManager(nGameName, nStory);
+		return instance;
 	}
 
 	@Override
 	public void init(Display display) {
-		// TODO Auto-generated method stub
 		if(antiAliasing) {
 			display.modifyRenderSettings(RenderSettings.Antialiasing.Enable);
 		}
@@ -52,8 +58,11 @@ public class GameManager extends SceneManager {
 		display.getJFrame().setResizable(false);
 		
 		GameScene gameScene = new GameScene("Game scene", dialogTextInfo.font, dialogTextInfo, story);
+		gameScene.withOnUpdate(onUpdate);
 		this.addScene(gameScene);
 		this.setCurrentScene(gameScene);
 		this.loadCurrentScene();
+		
+		onInit.invoke(EventArgs.none);
 	}
 }

@@ -13,7 +13,7 @@ public class StoryManager {
 	
 	StoryManager() {}
 	
-	StoryManager(Chapter[] nChapters) {
+	public StoryManager(Chapter[] nChapters) {
 		chapters = nChapters;
 	}
 
@@ -26,7 +26,11 @@ public class StoryManager {
 		return chapters[chapterIndex].getCurrentDialog();
 	}
 	
-	/*
+	public void setDialogIndex(int index) {
+		chapters[chapterIndex].setDialogIndex(index);
+	}
+	
+	/**
 	 * Print the Story tree.
 	 * Mainly used in debugging.*/
 	public void printStoryTree() {
