@@ -29,8 +29,12 @@ public class Chapter {
 		currentBranchName = nBranch;
 	}
 	
+	public int getDialogIndex() {
+		return branches.get(currentBranchName).dialogIndex;
+	}
+	
 	public void setDialogIndex(int index) {
-		branches.get(currentBranchName).setDialogIndex(index);
+		branches.get(currentBranchName).dialogIndex = index;
 	}
 	
 	/*
@@ -41,5 +45,9 @@ public class Chapter {
 			System.out.println("-- Branch " + set.getKey());
 			set.getValue().printBranchTree();
 		}
+	}
+
+	public int getCurrentBranchLength() {
+		return branches.get(currentBranchName).getThisBranchLength();
 	}
 }

@@ -26,8 +26,16 @@ public class StoryManager {
 		return chapters[chapterIndex].getCurrentDialog();
 	}
 	
+	public int getDialogIndex() {
+		return chapters[chapterIndex].getDialogIndex();
+	}
+	
 	public void setDialogIndex(int index) {
 		chapters[chapterIndex].setDialogIndex(index);
+	}
+	
+	public int getCurrentBranchLength() {
+		return chapters[chapterIndex].getCurrentBranchLength();
 	}
 	
 	/**

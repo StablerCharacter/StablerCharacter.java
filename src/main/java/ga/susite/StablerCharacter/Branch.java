@@ -1,8 +1,8 @@
 package ga.susite.StablerCharacter;
 
 public class Branch {
+	public int dialogIndex = 0;
 	Dialog[] dialogs;
-	int dialogIndex = 0;
 	
 	public Branch() {}
 	
@@ -18,14 +18,14 @@ public class Branch {
 		return dialogs[dialogIndex];
 	}
 	
-	public void setDialogIndex(int index) {
-		dialogIndex = index;
-	}
-	
 	public void printBranchTree() {
 		for(Dialog i : dialogs) {
 			System.out.println("Message: " + i.message);
 			System.out.println("Event: " + i.event);
 		}
+	}
+
+	public int getThisBranchLength() {
+		return dialogs.length;
 	}
 }

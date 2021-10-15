@@ -8,6 +8,7 @@ import tech.fastj.input.keyboard.Keyboard;
 import tech.fastj.input.keyboard.Keys;
 import tech.fastj.math.Point;
 import tech.fastj.math.Pointf;
+import tech.fastj.systems.control.DrawableManager;
 import tech.fastj.systems.control.Scene;
 
 import java.awt.Color;
@@ -21,11 +22,12 @@ import ga.susite.StablerCharacter.utils.EventArgs;
 
 public class GameScene extends Scene {
 	public static final SceneInfo SCENE_INFO = new SceneInfo("game");
+	public static DrawableManager drawableManagerInstance;
 	Font mainFont;
 	TextInfo dialogTextInfo;
 	Text2D dialogText;
 	StoryManager story;
-	Pointf screenCenter;
+	public static Pointf screenCenter;
 	ExecutorService executor;
 	Event<EventData> onUpdate;
 	
@@ -42,6 +44,10 @@ public class GameScene extends Scene {
 	}
 	
 	void nextDialogWithAnimation() {
+		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
+			System.out.println("Story ended!");
+			return;
+		}
 		Dialog dialog = story.getNext();
 		dialogText.setText("");
 		for(char character : dialog.message.toCharArray()) {
@@ -67,9 +73,13 @@ public class GameScene extends Scene {
 	 * @param screenCenter: the Screen center.
 	 * */
 	void nextDialog(Pointf screenCenter) {
-		this.screenCenter = screenCenter;
+		GameScene.screenCenter = screenCenter;
 		if(dialogTextInfo.isTextAnimated) {
 			executor.submit(this::nextDialogWithAnimation);
+			return;
+		}
+		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
+			System.out.println("Story ended!");
 			return;
 		}
 		Dialog dialog = story.getNext();
@@ -84,7 +94,6 @@ public class GameScene extends Scene {
 
 	@Override
 	public void load(Display display) {
-		// Code here
 		Point displayRes = display.getInternalResolution();
 		
 		new Button(this)
@@ -96,6 +105,7 @@ public class GameScene extends Scene {
 		
 		dialogText = dialogTextInfo.build("", display.getScreenCenter());
 		drawableManager.addGameObject(dialogText);
+		drawableManagerInstance = drawableManager;
 		story.setDialogIndex(-1);
 		nextDialog(display.getScreenCenter());
 	}
