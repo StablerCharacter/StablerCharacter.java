@@ -8,6 +8,10 @@ import tech.fastj.engine.FastJEngine;
 public class LogEvent implements Event {
 	String message;
 	
+	/**
+	 * Creates a new LogEvent instance with the specified logging message.
+	 * @param newMessage The message that is going to be logged when the dialog got triggered.
+	 */
 	public LogEvent(String newMessage) {
 		message = newMessage;
 	}

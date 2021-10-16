@@ -2,17 +2,20 @@ package ga.susite.StablerCharacter;
 
 import tech.fastj.engine.FastJEngine;
 import tech.fastj.graphics.display.Display;
+import tech.fastj.graphics.game.Sprite2D;
 import tech.fastj.graphics.game.Text2D;
 import tech.fastj.graphics.ui.elements.Button;
 import tech.fastj.input.keyboard.Keyboard;
 import tech.fastj.input.keyboard.Keys;
 import tech.fastj.math.Point;
 import tech.fastj.math.Pointf;
+import tech.fastj.resources.images.ImageResource;
 import tech.fastj.systems.control.DrawableManager;
 import tech.fastj.systems.control.Scene;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -64,7 +67,7 @@ public class GameScene extends Scene {
 				e.printStackTrace();
 			}
 		}
-		if(dialog.event != null) dialog.event.onActionTriggered();
+		// if(dialog.event != null) dialog.event.onActionTriggered();
 	}
 
 	/**
@@ -105,6 +108,8 @@ public class GameScene extends Scene {
 		
 		dialogText = dialogTextInfo.build("", display.getScreenCenter());
 		drawableManager.addGameObject(dialogText);
+		Sprite2D sprite = Sprite2D.fromImageResource(new ImageResource(Path.of("/ryandeathstare.png")));
+		drawableManager.addGameObject(sprite);
 		drawableManagerInstance = drawableManager;
 		story.setDialogIndex(-1);
 		nextDialog(display.getScreenCenter());

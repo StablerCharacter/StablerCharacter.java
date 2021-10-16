@@ -25,11 +25,11 @@ public class GameManager extends SceneManager {
 	private static GameManager instance;
 	
 	/**
-	 * Instantiate the Game manager class.
+	 * Creates the Game manager class instance.
 	 * 
 	 * @author lines-of-codes
 	 * @param nGameName: the Game name (Used for Window title, Main menu, etc.)
-	 * @param story: The Story of the Game.
+	 * @param nStory: The Story of the Game.
 	 */
 	private GameManager(String nGameName, StoryManager nStory) {
 		gameName = nGameName;
@@ -44,6 +44,13 @@ public class GameManager extends SceneManager {
 		FastJEngine.run();
 	}
 	
+	/**
+	 * Initialize the Game manager class.
+	 * 
+	 * @author lines-of-codes
+	 * @param nGameName the Game name (Used for Window title, Main menu, etc.)
+	 * @param nStory The Story of the Game.
+	 */
 	public static GameManager init(String nGameName, StoryManager nStory) {
 		instance = new GameManager(nGameName, nStory);
 		return instance;
