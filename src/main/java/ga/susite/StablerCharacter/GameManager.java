@@ -1,7 +1,7 @@
 package ga.susite.StablerCharacter;
 
 import tech.fastj.engine.FastJEngine;
-import tech.fastj.graphics.display.Display;
+import tech.fastj.graphics.display.FastJCanvas;
 import tech.fastj.graphics.display.RenderSettings;
 import tech.fastj.math.Point;
 import tech.fastj.systems.control.SceneManager;
@@ -39,7 +39,7 @@ public class GameManager extends SceneManager {
 	public void start(Point windowResolution) {
 		FastJEngine.init(gameName, this);
 		FastJEngine.configureWindowResolution(windowResolution);
-		FastJEngine.configureInternalResolution(windowResolution);
+		FastJEngine.configureCanvasResolution(windowResolution);
 		// FastJEngine.configureDebugging(true);
 		FastJEngine.run();
 	}
@@ -57,12 +57,12 @@ public class GameManager extends SceneManager {
 	}
 
 	@Override
-	public void init(Display display) {
+	public void init(FastJCanvas display) {
 		if(antiAliasing) {
 			display.modifyRenderSettings(RenderSettings.Antialiasing.Enable);
 		}
 		
-		display.getJFrame().setResizable(false);
+//		display.getJFrame().setResizable(false);
 		
 		GameScene gameScene = new GameScene("Game scene", dialogTextInfo.font, dialogTextInfo, story);
 		gameScene.withOnUpdate(onUpdate);

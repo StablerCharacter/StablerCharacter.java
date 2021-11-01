@@ -1,7 +1,7 @@
 package ga.susite.StablerCharacter;
 
 import tech.fastj.engine.FastJEngine;
-import tech.fastj.graphics.display.Display;
+import tech.fastj.graphics.display.FastJCanvas;
 import tech.fastj.graphics.game.Sprite2D;
 import tech.fastj.graphics.game.Text2D;
 import tech.fastj.graphics.ui.elements.Button;
@@ -96,32 +96,32 @@ public class GameScene extends Scene {
 	}
 
 	@Override
-	public void load(Display display) {
-		Point displayRes = display.getInternalResolution();
+	public void load(FastJCanvas canvas) {
+		Point displayRes = canvas.getResolution();
 		
 		new Button(this)
 			.setFont(mainFont)
 			.setText("Next")
 			.setFill(Color.GRAY)
-			.addOnAction(event -> nextDialog(display.getScreenCenter()))
+			.addOnAction(event -> nextDialog(canvas.getCanvasCenter()))
 			.translate(new Pointf(displayRes.x - 125, displayRes.y - 50));
 		
-		dialogText = dialogTextInfo.build("", display.getScreenCenter());
+		dialogText = dialogTextInfo.build("", canvas.getCanvasCenter());
 		drawableManager.addGameObject(dialogText);
-		Sprite2D sprite = Sprite2D.fromImageResource(new ImageResource(Path.of("/ryandeathstare.png")));
+		Sprite2D sprite = Sprite2D.fromImageResource(new ImageResource(Path.of("src/main/resources/ryandeathstare.png")));
 		drawableManager.addGameObject(sprite);
 		drawableManagerInstance = drawableManager;
 		story.setDialogIndex(-1);
-		nextDialog(display.getScreenCenter());
+		nextDialog(canvas.getCanvasCenter());
 	}
 
 	@Override
-	public void unload(Display display) {
+	public void unload(FastJCanvas display) {
 		// More code here
 	}
 
 	@Override
-	public void update(Display display) {
+	public void update(FastJCanvas display) {
 		if (Keyboard.isKeyRecentlyPressed(Keys.Enter)) {
 			FastJEngine.log("Enter key was pressed!");
 		}

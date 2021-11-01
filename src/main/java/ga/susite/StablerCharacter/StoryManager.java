@@ -1,12 +1,5 @@
 package ga.susite.StablerCharacter;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 public class StoryManager {
 	Chapter[] chapters;
 	Integer chapterIndex = 0;
@@ -48,11 +41,5 @@ public class StoryManager {
 			System.out.println("- Chapter index " + currentChapterIndex);
 			i.printChapterTree();
 		}
-	}
-	
-	@Deprecated
-	public static StoryManager loadFromFile(String filePath) throws IOException {
-		Gson gson = new Gson();
-		return gson.fromJson(Files.readString(Paths.get(filePath), StandardCharsets.UTF_8), StoryManager.class);
 	}
 }
