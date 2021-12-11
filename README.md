@@ -3,5 +3,5 @@ a Java implementation of [StablerCharacter](https://github.com/lines-of-codes/St
 
 ## External dependencies
 Here's the list of all external dependencies that is being used currently.
-- GSON
 - FastJ
+

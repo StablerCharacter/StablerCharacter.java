@@ -1,41 +1,23 @@
 package ga.susite.StablerCharacter;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
-import ga.susite.StablerCharacter.events.SpriteEvent;
-import ga.susite.StablerCharacter.utils.EventArgs;
+import ga.susite.StablerCharacter.events.LogEvent;
 import ga.susite.StablerCharacter.utils.MarkdownParser;
-//import tech.fastj.math.Point;
-import tech.fastj.math.Pointf;
-//import tech.fastj.resources.images.ImageResource;
+import tech.fastj.math.Point;
 
 public class Game {
 	public static void main(String[] args) {
-		try {
-			System.out.println(Paths.get(ClassLoader.getSystemResource("ryandeathstare.png").toURI()));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-//		StoryManager story = getRawStory();
-//		Game instance = new Game();
-//		GameManager gm = GameManager.init("StablerCharacter.java", story);
-//		gm.antiAliasing = true;
-//		gm.newChapterScreen = false;
-//		gm.onStoryEnd.addEventListener(instance::onStoryEnd);
-//		gm.start(new Point(800, 600));
-	}
-	
-	Void onStoryEnd(EventArgs<EventData> e) {
-		return null;
+		StoryManager story = getRawStory();
+		GameManager gm = GameManager.init("StablerCharacter.java", story);
+		gm.antiAliasing = true;
+		gm.newChapterScreen = false;
+		gm.start(new Point(800, 600));
 	}
 	
 	static StoryManager loadFromMarkdown() throws IOException {
 		StoryManager story = null;
-		// story = StoryManager.loadFromFile("D:\\eclipse-workspace\\StablerCharacter-java\\src\\main\\java\\ga\\susite\\StablerCharacter\\sampleStory.json");
 		MarkdownParser markdownParser = new MarkdownParser();
 		story = markdownParser.parseFile("D:\\eclipse-workspace\\StablerCharacter-java\\src\\main\\java\\ga\\susite\\StablerCharacter\\sampleMarkdown.md");
 		story.printStoryTree();
@@ -44,8 +26,7 @@ public class Game {
 	
 	static StoryManager getRawStory() {
 		Dialog[] dialogs = {
-			 new Dialog("Hello there!", new SpriteEvent(Path.of("ryandeathstare.png"), new Pointf(10, 10)))
-			// new Dialog("Hello there!", new LogEvent("hewwo"))
+			 new Dialog("Hello there!", new LogEvent("hewwo"))
 		};
 		Branch main = new Branch(dialogs);
 		HashMap<String, Branch> branches = new HashMap<String, Branch>();

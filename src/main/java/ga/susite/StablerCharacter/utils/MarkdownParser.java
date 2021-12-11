@@ -1,5 +1,7 @@
 package ga.susite.StablerCharacter.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import ga.susite.StablerCharacter.Branch;
 import ga.susite.StablerCharacter.Chapter;
@@ -21,9 +24,16 @@ public class MarkdownParser {
 	HashMap<String, Branch> branches = new HashMap<String, Branch>();
 	List<Dialog> dialogs = new ArrayList<Dialog>();
 	
-	public StoryManager parseFile(String filePath) throws IOException, IllegalStateException {
-		List<String> lines = Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
-		return parseLines(lines);
+	public StoryManager parseFile(String filePath) throws FileNotFoundException {
+		File file = new File(filePath);
+		Scanner fileReader = new Scanner(file);
+		while (fileReader.hasNextLine()) {
+			parseSingle(fileReader.nextLine());
+		}
+		fileReader.close();
+		branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
+		chapters.add(new Chapter(branches, currentChapter, currentChapterDescription));
+		return new StoryManager(chapters.toArray(new Chapter[0]));
 	}
 	
 	public StoryManager parseLines(List<String> lines) {

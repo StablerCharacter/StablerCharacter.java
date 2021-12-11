@@ -7,17 +7,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-15/">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/gson-2.8.7.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ASUS/.gradle/caches/modules-2/files-2.1/com.github.fastjengine/FastJ/1.6.0-SNAPSHOT-2/84c79814105286f05e93601b59b1df818c67f969/FastJ-1.6.0-SNAPSHOT-2.jar">
+	<classpathentry kind="lib" path="/media/lines-of-codes/B21EB9DB1EB998B5/Users/ASUS/.gradle/caches/modules-2/files-2.1/com.github.fastjengine/FastJ/1.6.0-SNAPSHOT-2/84c79814105286f05e93601b59b1df818c67f969/FastJ-1.6.0-SNAPSHOT-2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

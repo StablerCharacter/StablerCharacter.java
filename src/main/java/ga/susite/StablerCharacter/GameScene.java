@@ -2,20 +2,17 @@ package ga.susite.StablerCharacter;
 
 import tech.fastj.engine.FastJEngine;
 import tech.fastj.graphics.display.FastJCanvas;
-import tech.fastj.graphics.game.Sprite2D;
 import tech.fastj.graphics.game.Text2D;
 import tech.fastj.graphics.ui.elements.Button;
 import tech.fastj.input.keyboard.Keyboard;
 import tech.fastj.input.keyboard.Keys;
 import tech.fastj.math.Point;
 import tech.fastj.math.Pointf;
-import tech.fastj.resources.images.ImageResource;
 import tech.fastj.systems.control.DrawableManager;
 import tech.fastj.systems.control.Scene;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -48,10 +45,11 @@ public class GameScene extends Scene {
 	
 	void nextDialogWithAnimation() {
 		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
-			System.out.println("Story ended!");
+			FastJEngine.log("Story ended!");
 			return;
 		}
 		Dialog dialog = story.getNext();
+		if(dialog.event != null) dialog.event.onActionTriggered();
 		dialogText.setText("");
 		for(char character : dialog.message.toCharArray()) {
 			dialogText.setText(dialogText.getText() + Character.toString(character));
@@ -67,7 +65,6 @@ public class GameScene extends Scene {
 				e.printStackTrace();
 			}
 		}
-		// if(dialog.event != null) dialog.event.onActionTriggered();
 	}
 
 	/**
@@ -82,17 +79,17 @@ public class GameScene extends Scene {
 			return;
 		}
 		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
-			System.out.println("Story ended!");
+			FastJEngine.log("Story ended!");
 			return;
 		}
 		Dialog dialog = story.getNext();
+		if(dialog.event != null) dialog.event.onActionTriggered();
 		dialogText.setText(dialog.message);
 		if(dialogTextInfo.textPos == null) {
 			Pointf[] bounds = dialogText.getBounds();
 			screenCenter.x -= (bounds[1].x - bounds[0].x) / 2;
 			dialogText.setTranslation(screenCenter);
 		}
-		if(dialog.event != null) dialog.event.onActionTriggered();
 	}
 
 	@Override
@@ -104,12 +101,10 @@ public class GameScene extends Scene {
 			.setText("Next")
 			.setFill(Color.GRAY)
 			.addOnAction(event -> nextDialog(canvas.getCanvasCenter()))
-			.translate(new Pointf(displayRes.x - 125, displayRes.y - 50));
+			.translate(new Pointf(displayRes.x - 125, displayRes.y - 70));
 		
 		dialogText = dialogTextInfo.build("", canvas.getCanvasCenter());
 		drawableManager.addGameObject(dialogText);
-		Sprite2D sprite = Sprite2D.fromImageResource(new ImageResource(Path.of("src/main/resources/ryandeathstare.png")));
-		drawableManager.addGameObject(sprite);
 		drawableManagerInstance = drawableManager;
 		story.setDialogIndex(-1);
 		nextDialog(canvas.getCanvasCenter());

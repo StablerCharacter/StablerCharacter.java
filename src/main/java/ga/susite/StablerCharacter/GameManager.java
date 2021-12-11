@@ -3,6 +3,7 @@ package ga.susite.StablerCharacter;
 import tech.fastj.engine.FastJEngine;
 import tech.fastj.graphics.display.FastJCanvas;
 import tech.fastj.graphics.display.RenderSettings;
+import tech.fastj.logging.LogLevel;
 import tech.fastj.math.Point;
 import tech.fastj.systems.control.SceneManager;
 
@@ -40,8 +41,12 @@ public class GameManager extends SceneManager {
 		FastJEngine.init(gameName, this);
 		FastJEngine.configureWindowResolution(windowResolution);
 		FastJEngine.configureCanvasResolution(windowResolution);
-		// FastJEngine.configureDebugging(true);
 		FastJEngine.run();
+	}
+	
+	public void start(Point windowResolution, LogLevel logLevel) {
+		FastJEngine.configureLogging(logLevel);
+		start(windowResolution);
 	}
 	
 	/**
@@ -70,6 +75,7 @@ public class GameManager extends SceneManager {
 		this.setCurrentScene(gameScene);
 		this.loadCurrentScene();
 		
+		FastJEngine.trace("onInit event is being invoked...");
 		onInit.invoke(EventArgs.none);
 	}
 }
