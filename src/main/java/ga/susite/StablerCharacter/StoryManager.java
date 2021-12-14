@@ -4,8 +4,9 @@ public class StoryManager {
 	Chapter[] chapters;
 	Integer chapterIndex = 0;
 	
-	StoryManager() {}
-	
+	/**
+	 * @param nChapters All of the chapters.
+	 */
 	public StoryManager(Chapter[] nChapters) {
 		chapters = nChapters;
 	}
@@ -33,7 +34,8 @@ public class StoryManager {
 	
 	/**
 	 * Print the Story tree.
-	 * Mainly used in debugging.*/
+	 * Mainly used in debugging.
+	 */
 	public void printStoryTree() {
 		System.out.println("- StoryManager - ");
 		int currentChapterIndex = 0;

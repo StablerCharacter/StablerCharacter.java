@@ -4,13 +4,25 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class Chapter {
+	/**
+	 * The chapter name.
+	 */
 	public String name;
+	/**
+	 * The chapter description.
+	 */
 	public String description;
+	/**
+	 * The name of the entry branch.
+	 */
 	public String currentBranchName = "main";
 	HashMap<String, Branch> branches;
 	
-	public Chapter() {}
-	
+	/**
+	 * @param nBranches The HashMap of the branches. Structured in a branchName:value structure.
+	 * @param nName The chapter name.
+	 * @param nDescription The chapter description.
+	 */
 	public Chapter(HashMap<String, Branch> nBranches, String nName, String nDescription) {
 		branches = nBranches;
 		name = nName;

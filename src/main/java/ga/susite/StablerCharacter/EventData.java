@@ -5,7 +5,13 @@ package ga.susite.StablerCharacter;
  * Used in Events. (ga.susite.StablerCharacter.utils.Event)
  */
 public class EventData {
+	/**
+	 * The information about the current dialog.
+	 */
 	public Dialog currentDialog;
+	/**
+	 * The information about the current scene.
+	 */
 	public SceneInfo currentScene;
 	
 	public EventData(Dialog currentDialog, SceneInfo currentScene) {

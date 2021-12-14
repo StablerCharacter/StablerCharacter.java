@@ -7,9 +7,22 @@ import tech.fastj.graphics.game.Text2D;
 import tech.fastj.math.Pointf;
 
 public class TextInfo {
-	public Color color = Color.BLACK; // The color of the text
-	public Font font = new Font("Segoe UI", Font.PLAIN, 16); // The font of the text
-	public Pointf textPos; // The text position
+	/**
+	 * The color of the text.
+	 */
+	public Color color = Color.BLACK;
+	/**
+	 * The font of the text.
+	 */
+	public Font font = new Font("Segoe UI", Font.PLAIN, 16);
+	/**
+	 * The position of the text. By default will be at the center of the screen.
+	 */
+	public Pointf textPos;
+	/**
+	 * Tells if the text is supposed to be animated.
+	 * This property does not affect some system.
+	 */
 	public boolean isTextAnimated = true;
 	/**
 	 * The duration of sleeping between characters in text animation rendering in milliseconds.
@@ -30,21 +43,25 @@ public class TextInfo {
 		textPos = nTextPos;
 	}
 	
-	public void withColor(Color newColor) {
+	public TextInfo withColor(Color newColor) {
 		this.color = newColor;
+		return this;
 	}
 	
-	public void withoutTextAnimation() {
+	public TextInfo withoutTextAnimation() {
 		isTextAnimated = false;
+		return this;
 	}
 	
-	public void withTextAnimation() {
+	public TextInfo withTextAnimation() {
 		isTextAnimated = true;
+		return this;
 	}
 	
-	public void withTextAnimationInterval(int interval) {
+	public TextInfo withTextAnimationInterval(int interval) {
 		textAnimationInterval = interval;
-	}	
+		return this;
+	}
 	
 	
 	/**

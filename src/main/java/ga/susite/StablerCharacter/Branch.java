@@ -1,6 +1,9 @@
 package ga.susite.StablerCharacter;
 
 public class Branch {
+	/**
+	 * The current dialog the branch is on.
+	 */
 	public int dialogIndex = 0;
 	Dialog[] dialogs;
 	

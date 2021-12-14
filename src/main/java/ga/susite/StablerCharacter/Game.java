@@ -11,9 +11,7 @@ public class Game {
 	public static void main(String[] args) {
 		StoryManager story = getRawStory();
 		GameManager gm = GameManager.init("StablerCharacter.java", story);
-		gm.antiAliasing = true;
-		gm.newChapterScreen = false;
-		gm.start(new Point(800, 600));
+		gm.start();
 	}
 	
 	static StoryManager loadFromMarkdown() throws IOException {

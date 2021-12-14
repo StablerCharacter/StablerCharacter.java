@@ -1,7 +1,7 @@
 package ga.susite.StablerCharacter.utils;
 
 public class EventArgs<T> {
-	public static EventArgs<Void> none = new EventArgs<Void>(null);
+	public static final EventArgs<Void> none = new EventArgs<Void>(null);
 	
 	T data;
 	

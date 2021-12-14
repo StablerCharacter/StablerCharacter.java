@@ -17,19 +17,27 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import ga.susite.StablerCharacter.utils.Event;
 import ga.susite.StablerCharacter.utils.EventArgs;
 
 public class GameScene extends Scene {
-	public static final SceneInfo SCENE_INFO = new SceneInfo("game");
+	/**
+	 * The information about the scene.
+	 */
+	public static final SceneInfo SCENE_INFO = new SceneInfo("GameScene");
+	/**
+	 * The FastJ's DrawableManager instance.
+	 * Used internally in events.
+	 */
 	public static DrawableManager drawableManagerInstance;
 	Font mainFont;
 	TextInfo dialogTextInfo;
 	Text2D dialogText;
 	StoryManager story;
+	/**
+	 * The screen center. Highly used internally.
+	 */
 	public static Pointf screenCenter;
 	ExecutorService executor;
-	Event<EventData> onUpdate;
 	
 	public GameScene(String name, Font nMainFont, TextInfo nDialogTextInfo, StoryManager nStory) {
 		super(name);
@@ -39,13 +47,10 @@ public class GameScene extends Scene {
 		executor = Executors.newSingleThreadExecutor();
 	}
 	
-	public void withOnUpdate(Event<EventData> onUpdate) {
-		this.onUpdate = onUpdate;
-	}
-	
 	void nextDialogWithAnimation() {
 		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
 			FastJEngine.log("Story ended!");
+			GameManager.onStoryEnd.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 			return;
 		}
 		Dialog dialog = story.getNext();
@@ -80,6 +85,7 @@ public class GameScene extends Scene {
 		}
 		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
 			FastJEngine.log("Story ended!");
+			GameManager.onStoryEnd.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 			return;
 		}
 		Dialog dialog = story.getNext();
@@ -106,8 +112,11 @@ public class GameScene extends Scene {
 		dialogText = dialogTextInfo.build("", canvas.getCanvasCenter());
 		drawableManager.addGameObject(dialogText);
 		drawableManagerInstance = drawableManager;
+		FastJEngine.log("Starting story...");
 		story.setDialogIndex(-1);
 		nextDialog(canvas.getCanvasCenter());
+		FastJEngine.log("Invoking onStoryStart event...");
+		GameManager.onStoryStart.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 	}
 
 	@Override
@@ -121,6 +130,6 @@ public class GameScene extends Scene {
 			FastJEngine.log("Enter key was pressed!");
 		}
 		
-		onUpdate.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
+		GameManager.onUpdate.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 	}
 }
