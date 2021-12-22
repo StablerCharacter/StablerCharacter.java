@@ -9,8 +9,7 @@ import tech.fastj.math.Point;
 
 public class Game {
 	public static void main(String[] args) {
-		StoryManager story = getRawStory();
-		GameManager gm = GameManager.init("StablerCharacter.java", story);
+		GameManager gm = GameManager.init("StablerCharacter.java", getRawStory());
 		gm.start();
 	}
 	

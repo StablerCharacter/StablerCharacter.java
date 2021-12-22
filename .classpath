@@ -12,7 +12,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/lines-of-codes/.gradle/caches/modules-2/files-2.1/com.github.fastjengine/FastJ/94e50163eb/78c37f221323256f6b109c255a7e6b3e8ce82989/FastJ-94e50163eb.jar" sourcepath="/home/lines-of-codes/.gradle/caches/modules-2/files-2.1/com.github.fastjengine/FastJ/94e50163eb/c24302c6af5fba2ef37e944e3ff2a6da4f9d1ff0/FastJ-94e50163eb-sources.jar">
+	<classpathentry kind="lib" path="/home/lines-of-codes/.gradle/caches/modules-2/files-2.1/com.github.fastjengine/FastJ/1.6.0-SNAPSHOT-3/fb07c1e32a60301d39ab028837d63bb3e59b1890/FastJ-1.6.0-SNAPSHOT-3.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

@@ -24,7 +24,7 @@ public class Branch {
 	public void printBranchTree() {
 		for(Dialog i : dialogs) {
 			System.out.println("Message: " + i.message);
-			System.out.println("Event: " + i.event);
+			System.out.println("Event(s): " + i.events.toString());
 		}
 	}
 

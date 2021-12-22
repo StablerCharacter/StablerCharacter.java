@@ -11,7 +11,7 @@ import tech.fastj.logging.LogLevel;
 import tech.fastj.math.Point;
 import tech.fastj.systems.control.SceneManager;
 
-import ga.susite.StablerCharacter.utils.Event;
+import ga.susite.StablerCharacter.utils.MethodEvent;
 import ga.susite.StablerCharacter.utils.EventArgs;
 import ga.susite.StablerCharacter.utils.OptionDialog;
 
@@ -59,19 +59,19 @@ public class GameManager extends SceneManager {
 	/**
 	 * An event triggered when the game manager is initialized.
 	 */
-	public static Event<Void> onInit = new Event<Void>();
+	public static MethodEvent<Void> onInit = new MethodEvent<Void>();
 	/**
 	 * An event triggered when the game update loop is being called.
 	 */
-	public static Event<EventData> onUpdate = new Event<EventData>();
+	public static MethodEvent<EventData> onUpdate = new MethodEvent<EventData>();
 	/**
 	 * An event triggered when the story ended.
 	 */
-	public static Event<EventData> onStoryEnd = new Event<EventData>();
+	public static MethodEvent<EventData> onStoryEnd = new MethodEvent<EventData>();
 	/**
 	 * An event triggered when the story started. (The first dialog appeared)
 	 */
-	public static Event<EventData> onStoryStart = new Event<EventData>();
+	public static MethodEvent<EventData> onStoryStart = new MethodEvent<EventData>();
 	
 	private static GameManager instance;
 	
@@ -97,12 +97,12 @@ public class GameManager extends SceneManager {
 					.withTitle("Options")
 					.withPrompt(new OptionDialog())
 					.build(),
-				DialogOptions.Default,
 				DialogMessageTypes.Question,
 				null,
 				null
 			);
 		}
+		
 		FastJEngine.init(gameName, this);
 		FastJEngine.configureWindowResolution(gameWindowResolution);
 		FastJEngine.configureCanvasResolution(gameWindowResolution);

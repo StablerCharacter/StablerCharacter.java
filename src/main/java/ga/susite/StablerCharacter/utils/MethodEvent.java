@@ -8,7 +8,7 @@ import java.util.function.Function;
  * @author lines-of-codes
  * @param EventArgsType The type of the EventArgs that will be provided to the subscribers method.
  */
-public class Event<EventArgsType> {
+public class MethodEvent<EventArgsType> {
 	ArrayList<Function<EventArgs<EventArgsType>, Void>> subscribers = new ArrayList<Function<EventArgs<EventArgsType>, Void>>();
 	
 	public void invoke(EventArgs<EventArgsType> eventArgs) {

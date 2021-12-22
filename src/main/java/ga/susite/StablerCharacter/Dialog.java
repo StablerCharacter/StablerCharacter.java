@@ -1,6 +1,7 @@
 package ga.susite.StablerCharacter;
 
 import ga.susite.StablerCharacter.events.Event;
+import ga.susite.StablerCharacter.events.Events;
 
 public class Dialog {
 	/**
@@ -10,14 +11,14 @@ public class Dialog {
 	/**
 	 * All of the actions that is going to be triggered in the dialog.
 	 */
-	public Event[] event;
+	public Events events;
 	
 	public Dialog(String nMessage) {
 		message = nMessage;
 	}
 	
-	Dialog(String nMessage, Event... nEvent) {
+	public Dialog(String nMessage, Event... nEvent) {
 		message = nMessage;
-		event = nEvent;
+		events = new Events(nEvent);
 	}
 }

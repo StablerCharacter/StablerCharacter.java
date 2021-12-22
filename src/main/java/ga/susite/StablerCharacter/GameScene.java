@@ -54,7 +54,7 @@ public class GameScene extends Scene {
 			return;
 		}
 		Dialog dialog = story.getNext();
-		if(dialog.event != null) dialog.event.onActionTriggered();
+		if(dialog.events != null) dialog.events.invoke();
 		dialogText.setText("");
 		for(char character : dialog.message.toCharArray()) {
 			dialogText.setText(dialogText.getText() + Character.toString(character));
@@ -89,7 +89,7 @@ public class GameScene extends Scene {
 			return;
 		}
 		Dialog dialog = story.getNext();
-		if(dialog.event != null) dialog.event.onActionTriggered();
+		if(dialog.events != null) dialog.events.invoke();
 		dialogText.setText(dialog.message);
 		if(dialogTextInfo.textPos == null) {
 			Pointf[] bounds = dialogText.getBounds();
