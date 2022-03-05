@@ -1,0 +1,59 @@
+import java.nio.file.Files
+
+plugins {
+    id 'java'
+}
+
+group("ga.susite.scfw2d")
+version('1.0.0')
+description("Example programs for the StablerCharacter.java game engine.")
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation(project(':lib'))
+    implementation("org.slf4j:slf4j-simple:2.0.0-alpha5")
+    implementation("com.github.fastjengine:FastJ:1.6.0")
+}
+
+sourceSets {
+    main.java.srcDirs = ['java']
+    main.resources.srcDirs = ['resources']
+}
+
+task run(type: Exec) {
+    doFirst {
+        if(!project.hasProperty("example")) {
+            throw new IllegalArgumentException(
+                "You'll need to specify which example to run with the \"example\" property. For example, \"gradlew examples:run -Pexample=HelloWorld\""
+            )
+        }
+
+        if(!Files.exists(java.nio.file.Path.of(projectDir.toString(), 'java', 'ga', 'susite', 'scfw2d', 'examples', project.getProperty('example') as String))) {
+            throw new IllegalArgumentException(
+                "The example \"${project.getProperty("example")}\" doesn't exist."
+            )
+        }
+    }
+
+    dependsOn(tasks.compileJava, tasks.processResources)
+    description = 'Runs an example program.'
+    group = 'Execution'
+
+    commandLine(
+        'java',
+        '-classpath', sourceSets.main.runtimeClasspath.getAsPath(),
+        "ga.susite.scfw2d.examples.${project.getProperty("example")}"
+    )
+}
