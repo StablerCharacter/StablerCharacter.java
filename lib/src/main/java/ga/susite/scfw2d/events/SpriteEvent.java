@@ -55,5 +55,4 @@ public class SpriteEvent implements Event {
 			System.out.println("something else");
 		}
 	}
-
 }

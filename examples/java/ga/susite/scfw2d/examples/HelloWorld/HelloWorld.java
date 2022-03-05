@@ -8,19 +8,21 @@ import tech.fastj.math.Point;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        GameManager gm = GameManager.init("Hello StablerCharacter.java!", getRawStory());
+        StoryManager story = getRawStory();
+        GameManager gm = GameManager.init("Hello StablerCharacter.java!", story);
         gm.start();
     }
 
     static StoryManager getRawStory() {
-        Dialog[] dialogs = {
-            new Dialog("Hello there!", new LogEvent("Hello from the log event."))
+        StoryConstructor storyconstructor = new StoryConstructor() {
+            @Override
+            public void buildContent() {
+                chapter("Chapter 1", null);
+                branch("main");
+                dialog("Hello there!", new LogEvent("Hello from the log event!"));
+            }
         };
-        Branch main = new Branch(dialogs);
-        HashMap<String, Branch> branches = new HashMap<String, Branch>();
-        branches.put("main", main);
-        Chapter chapter = new Chapter(branches, "Chapter 1", "Hello world");
-        Chapter[] chapters = { chapter };
-        return new StoryManager(chapters);
+        storyconstructor.buildContent();
+        return storyconstructor.finalizeStory();
     }
 }

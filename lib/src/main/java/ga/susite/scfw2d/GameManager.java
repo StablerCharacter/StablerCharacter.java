@@ -171,9 +171,7 @@ public class GameManager extends SceneManager {
 		
 		// display.getJFrame().setResizable(false);
 		
-		for(Scene scene : scenes) {
-			this.addScene(scene);
-		}
+		this.addScenes(scenes);
 		// Loads the first scene
 		loadScene(0);
 		
