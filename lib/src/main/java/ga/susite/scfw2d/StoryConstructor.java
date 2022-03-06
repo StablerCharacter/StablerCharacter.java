@@ -1,6 +1,5 @@
 package ga.susite.scfw2d;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +10,10 @@ class ChapterInfo {
     public String chapterDescription;
 
     public ChapterInfo(String newChapterName, String newChapterDescription) {
-        if(chapterDescription == null) chapterDescription = "";
+        if(newChapterName == null)
+            throw new NullPointerException("Chapter name cannot be null!");
+        if(newChapterDescription == null)
+            newChapterDescription = "";
         chapterName = newChapterName;
         chapterDescription = newChapterDescription;
     }

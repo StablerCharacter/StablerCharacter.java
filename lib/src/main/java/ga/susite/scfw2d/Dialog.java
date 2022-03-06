@@ -33,4 +33,10 @@ public class Dialog {
 		message = nMessage;
 		events = new Events(nEvents);
 	}
+
+	public boolean equals(Dialog other) {
+		if(message != other.message) return false;
+		if(events != null && !events.equals(other.events)) return false;
+		return true;
+	}
 }

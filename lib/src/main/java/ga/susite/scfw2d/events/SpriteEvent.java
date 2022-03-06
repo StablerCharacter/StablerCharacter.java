@@ -55,4 +55,9 @@ public class SpriteEvent implements Event {
 			System.out.println("something else");
 		}
 	}
+
+	@Override
+	public String getEventName() {
+		return "SpriteEvent";
+	}
 }

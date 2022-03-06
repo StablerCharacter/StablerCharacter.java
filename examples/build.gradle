@@ -54,6 +54,6 @@ task run(type: Exec) {
     commandLine(
         'java',
         '-classpath', sourceSets.main.runtimeClasspath.getAsPath(),
-        "ga.susite.scfw2d.examples.${project.getProperty("example")}"
+        "ga.susite.scfw2d.examples.${project.hasProperty("example") ? project.getProperty("example") : ''}.Main"
     )
 }

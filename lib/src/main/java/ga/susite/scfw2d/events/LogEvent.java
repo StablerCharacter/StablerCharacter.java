@@ -20,4 +20,9 @@ public class LogEvent implements Event {
 	public void onActionTriggered() {
 		FastJEngine.log(message);
 	}
+
+	@Override
+	public String getEventName() {
+		return "LogEvent";
+	}
 }

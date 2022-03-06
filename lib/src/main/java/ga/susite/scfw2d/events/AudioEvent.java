@@ -20,4 +20,8 @@ public class AudioEvent implements Event {
 	public void onActionTriggered() {
 		AudioManager.playSound(audioPath);
 	}
+
+	public String getEventName() {
+		return "AudioEvent";
+	}
 }

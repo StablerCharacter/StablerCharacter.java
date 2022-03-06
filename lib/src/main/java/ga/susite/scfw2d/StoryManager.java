@@ -67,4 +67,13 @@ public class StoryManager {
 			i.printChapterTree();
 		}
 	}
+
+	public boolean equals(StoryManager other) {
+		if(chapters.length != other.chapters.length) return false;
+		for(int i = 0; i < chapters.length; i++) {
+			if(!chapters[i].equals(other.chapters[i])) return false;
+		}
+		if(chapterIndex != other.chapterIndex) return false;
+		return true;
+	}
 }

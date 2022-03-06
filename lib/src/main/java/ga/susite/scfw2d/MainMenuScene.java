@@ -42,12 +42,8 @@ public class MainMenuScene extends Scene {
 	}
 
 	@Override
-	public void unload(FastJCanvas canvas) {
-		// TODO Auto-generated method stub
-	}
+	public void unload(FastJCanvas canvas) {}
 
 	@Override
-	public void update(FastJCanvas canvas) {
-		// TODO Auto-generated method stub
-	}
+	public void update(FastJCanvas canvas) {}
 }

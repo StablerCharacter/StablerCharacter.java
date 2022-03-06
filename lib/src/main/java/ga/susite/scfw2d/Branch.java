@@ -54,4 +54,13 @@ public class Branch {
 	public int getThisBranchLength() {
 		return dialogs.length;
 	}
+
+	public boolean equals(Branch other) {
+		if(dialogIndex != other.dialogIndex) return false;
+		if(dialogs.length != other.dialogs.length) return false;
+		for(int i = 0; i < dialogs.length; i++) {
+			if(!dialogs[i].equals(other.dialogs[i])) return false;
+		}
+		return true;
+	}
 }

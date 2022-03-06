@@ -32,7 +32,6 @@ class BeautifulPoint extends Point {
  * @author lines-of-codes
  * The OptionDialog class used in Options dialog.
  */
-@SuppressWarnings("serial")
 public class OptionDialog extends JPanel {
 	/**
 	 * Initialize the JPanel with controls to set the game settings.

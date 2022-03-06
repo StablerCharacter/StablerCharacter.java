@@ -34,4 +34,22 @@ public class Events {
 			event.onActionTriggered();
 		}
 	}
+
+	public boolean equals(Events other) {
+		if(events.size() != other.events.size()) return false;
+		for(int i = 0; i < events.size(); i++) {
+			if(!events.get(i).getEventName().equals(other.events.get(i).getEventName())) return false;
+		}
+		return true;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder("[");
+		for(Event event : events) {
+			sb.append(event.getEventName() + ", ");
+		}
+		sb.delete(sb.length() - 2, sb.length());
+		sb.append("]");
+		return sb.toString();
+	}
 }
