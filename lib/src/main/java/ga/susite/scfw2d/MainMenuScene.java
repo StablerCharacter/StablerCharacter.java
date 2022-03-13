@@ -29,6 +29,7 @@ public class MainMenuScene extends Scene {
 	 * Play the game.
 	 */
 	public void playGame() {
+		// TODO: Implement this method.
 	}
 
 	@Override
@@ -42,8 +43,12 @@ public class MainMenuScene extends Scene {
 	}
 
 	@Override
-	public void unload(FastJCanvas canvas) {}
+	public void unload(FastJCanvas canvas) {
+		// No need for any unload code.
+	}
 
 	@Override
-	public void update(FastJCanvas canvas) {}
+	public void update(FastJCanvas canvas) {
+		// There's not any logic that needs to be run in every frame yet.
+	}
 }

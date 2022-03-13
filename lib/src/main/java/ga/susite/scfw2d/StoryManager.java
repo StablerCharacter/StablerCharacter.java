@@ -1,5 +1,7 @@
 package ga.susite.scfw2d;
 
+import tech.fastj.engine.FastJEngine;
+
 /**
  * Stores information about the chapters.
  */
@@ -60,10 +62,10 @@ public class StoryManager {
 	 * Mainly used in debugging.
 	 */
 	public void printStoryTree() {
-		System.out.println("- StoryManager - ");
+		FastJEngine.log("- StoryManager - ");
 		int currentChapterIndex = 0;
 		for(Chapter i : chapters) {
-			System.out.println("- Chapter index " + currentChapterIndex);
+			FastJEngine.log("- Chapter index " + currentChapterIndex);
 			i.printChapterTree();
 		}
 	}
@@ -73,7 +75,7 @@ public class StoryManager {
 		for(int i = 0; i < chapters.length; i++) {
 			if(!chapters[i].equals(other.chapters[i])) return false;
 		}
-		if(chapterIndex != other.chapterIndex) return false;
+		if(!chapterIndex.equals(other.chapterIndex)) return false;
 		return true;
 	}
 }

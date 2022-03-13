@@ -1,5 +1,7 @@
 package ga.susite.scfw2d;
 
+import tech.fastj.engine.FastJEngine;
+
 /**
  * The story branch. Stores dialogs.
  */
@@ -42,8 +44,8 @@ public class Branch {
 	 */
 	public void printBranchTree() {
 		for(Dialog i : dialogs) {
-			System.out.println("Message: " + i.message);
-			System.out.println("Event(s): " + i.events.toString());
+			FastJEngine.log("Message: " + i.message);
+			FastJEngine.log("Event(s): " + i.events.toString());
 		}
 	}
 

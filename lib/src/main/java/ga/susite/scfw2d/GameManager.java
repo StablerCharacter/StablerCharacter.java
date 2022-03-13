@@ -24,7 +24,7 @@ public class GameManager extends SceneManager {
 	/**
 	 * The game project name. This will be used for the Window title.
 	 */
-	public static String gameName;
+	public String gameName;
 	/**
 	 * a Boolean to indicate to Enable Anti-aliasing or not.
 	 */
@@ -37,13 +37,13 @@ public class GameManager extends SceneManager {
 	 * Sets if the default option dialog is enabled.<br>
 	 * The option could be {@code disabled}, {@code engineArgs}, and {@code enabled}.<br>
 	 * <ul>
-	 * 	<li>{@code disabled} will completely disable the options dialog.</li>
-	 * 	<li>{@code engineArgs} will enable the options dialog if it's specified in the command line. 
+	 * 	<li>{@code DISABLED} will completely disable the options dialog.</li>
+	 * 	<li>{@code ENGINE_ARGS} will enable the options dialog if it's specified in the command line. 
 	 * (Currently, this is not implemented)</li>
-	 * 	<li>{@code enabled} will always enable the options dialog.</li>
+	 * 	<li>{@code ENABLED} will always enable the options dialog.</li>
 	 * </ul>
 	 */
-	public OptionDialogOption optionDialog = OptionDialogOption.enabled;
+	public OptionDialogOption optionDialog = OptionDialogOption.ENABLED;
 	/**
 	 * The overall rendering quality of FastJ.
 	 */
@@ -51,7 +51,7 @@ public class GameManager extends SceneManager {
 	/**
 	 * The game story manager.
 	 */
-	public static StoryManager story;
+	public StoryManager story;
 	/**
 	 * The information about the dialog text info.
 	 */
@@ -168,8 +168,6 @@ public class GameManager extends SceneManager {
 			display.modifyRenderSettings(RenderSettings.Antialiasing.Enable);
 		} else display.modifyRenderSettings(RenderSettings.Antialiasing.Disable);
 		display.modifyRenderSettings(renderingQuality);
-		
-		// display.getJFrame().setResizable(false);
 		
 		this.addScenes(scenes);
 		// Loads the first scene

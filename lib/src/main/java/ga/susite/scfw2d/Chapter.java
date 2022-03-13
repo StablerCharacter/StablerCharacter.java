@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import tech.fastj.engine.FastJEngine;
+
 /**
  * Represents a chapter of a game. Stores branches.
  */
@@ -79,7 +81,7 @@ public class Chapter {
 	 */
 	public void printChapterTree() {
 		for(Entry<String, Branch> set : branches.entrySet()) {
-			System.out.println("-- Branch " + set.getKey());
+			FastJEngine.log("-- Branch " + set.getKey());
 			set.getValue().printBranchTree();
 		}
 	}
@@ -95,17 +97,16 @@ public class Chapter {
 	public boolean equals(Chapter other) {
 		if(!name.equals(other.name)) return false;
 		if(!description.equals(other.description)) return false;
-		if(currentBranchName != other.currentBranchName) return false;
+		if(!currentBranchName.equals(other.currentBranchName)) return false;
 		if(branches.size() != other.branches.size()) return false;
 		final Set<Entry<String, Branch>> branchEntries = branches.entrySet();
 		final Set<Entry<String, Branch>> otherBranchEntries = other.branches.entrySet();
 		ArrayList<Boolean> branchEquals = new ArrayList<Boolean>();
 		branchEntries.forEach(entry -> {
 			otherBranchEntries.forEach(otherEntry -> {
-				if(otherEntry.getKey().equals(entry.getKey())) {
-					if(entry.getValue().equals(otherEntry.getValue())) {
-						branchEquals.add(true);
-					}
+				if(otherEntry.getKey().equals(entry.getKey()) &&
+					entry.getValue().equals(otherEntry.getValue())) {
+					branchEquals.add(true);
 				}
 			});
 		});

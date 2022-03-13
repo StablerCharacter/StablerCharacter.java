@@ -35,7 +35,7 @@ public class Dialog {
 	}
 
 	public boolean equals(Dialog other) {
-		if(message != other.message) return false;
+		if(!message.equals(other.message)) return false;
 		if(events != null && !events.equals(other.events)) return false;
 		return true;
 	}

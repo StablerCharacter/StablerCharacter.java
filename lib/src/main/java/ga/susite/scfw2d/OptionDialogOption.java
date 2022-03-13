@@ -8,13 +8,13 @@ public enum OptionDialogOption {
 	/**
 	 * Totally disable the option dialog.
 	 */
-	disabled,
+	DISABLED,
 	/**
 	 * Enable option dialog if specified in the command line arguments.
 	 */
-	engineArgs,
+	ENGINE_ARGS,
 	/**
 	 * Always enable the Option dialog.
 	 */
-	enabled
+	ENABLED
 }

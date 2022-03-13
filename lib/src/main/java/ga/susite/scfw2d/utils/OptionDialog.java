@@ -23,6 +23,7 @@ class BeautifulPoint extends Point {
 		super(x, y);
 	}
 	
+	@Override
 	public String toString() {
 		return Integer.toString(x) + "x" + Integer.toString(y);
 	}
@@ -79,7 +80,7 @@ public class OptionDialog extends JPanel {
 		qualityDropdown.addActionListener(e -> {
 			String selected = (String) qualityDropdown.getSelectedItem();
 			GameManager gm = GameManager.get();
-			if(selected == "Low") gm.renderingQuality = RenderSettings.RenderingQuality.Low;
+			if(selected.equals("Low")) gm.renderingQuality = RenderSettings.RenderingQuality.Low;
 			else gm.renderingQuality = RenderSettings.RenderingQuality.High;
 		});
 		renderingQuality.add(qualityDropdown);

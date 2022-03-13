@@ -12,6 +12,8 @@ import ga.susite.scfw2d.Chapter;
 import ga.susite.scfw2d.Dialog;
 import ga.susite.scfw2d.StoryManager;
 
+import tech.fastj.engine.FastJEngine;
+
 /**
  * A basic parser used for parsing (a modified version of) Markdown as a StoryManager.
  */
@@ -53,6 +55,45 @@ public class MarkdownParser {
 		chapters.add(new Chapter(branches, currentChapter, currentChapterDescription));
 		return new StoryManager(chapters.toArray(new Chapter[0]));
 	}
+
+	void parseHeading(String line) {
+		if(line.startsWith("##")) {
+			if(currentChapter == null) {
+				throw new IllegalStateException("Branch is being created - But no chapter is present in the context.");
+			}
+			if(currentBranchName != null) {
+				branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
+			}
+			currentBranchName = line.substring(2, line.length()).trim();
+		} else {
+			if(currentChapter != null) {
+				chapters.add(new Chapter(branches, currentChapter, currentChapterDescription));
+				currentChapterDescription = "";
+			}
+			currentChapter = line.substring(1, line.length()).trim();
+		}
+	}
+
+	void parseContent(String line) {
+		String[] events;
+		if(line.trim().endsWith("]")) {
+			String[] splittedString = line.trim().split("\\]\\[");
+			String eventString = splittedString[1];
+			eventString = eventString.substring(0, eventString.length() - 1);
+			line = splittedString[0];
+			events = eventString.split(" ");
+			for(String event : events) {
+				FastJEngine.debug("Referenced event: " + event);
+			}
+		}
+		if(line.startsWith("|")) {
+			Dialog dlg = dialogs.get(dialogs.size() - 1);
+			dlg.message += "\n" + line.substring(1, line.length());
+			dialogs.set(dialogs.size() - 1, dlg);
+		}
+		if(line.startsWith("|")) return;
+		dialogs.add(new Dialog(line));
+	}
 	
 	/**
 	 * Parse a single line of text.
@@ -60,42 +101,11 @@ public class MarkdownParser {
 	 */
 	void parseSingle(String line) {
 		if(line.startsWith("#")) {
-			if(line.startsWith("##")) {
-				if(currentChapter == null) {
-					throw new IllegalStateException("Branch is being created - But no chapter is present in the context.");
-				}
-				if(currentBranchName != null) {
-					branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
-				}
-				currentBranchName = line.substring(2, line.length()).trim();
-			} else {
-				if(currentChapter != null) {
-					chapters.add(new Chapter(branches, currentChapter, currentChapterDescription));
-					currentChapterDescription = "";
-				}
-				currentChapter = line.substring(1, line.length()).trim();
-			}
+			parseHeading(line);
 		} else if(line.startsWith("-")) {
 			currentChapterDescription += line.substring(1, line.length());
 		} else {
-			String[] events;
-			if(line.trim().endsWith("]")) {
-				String[] splittedString = line.trim().split("\\]\\[");
-				String eventString = splittedString[1];
-				eventString = eventString.substring(0, eventString.length() - 1);
-				line = splittedString[0];
-				events = eventString.split(" ");
-				for(String event : events) {
-					System.out.println("Referenced event: " + event);
-				}
-			}
-			if(line.startsWith("|")) {
-				Dialog dlg = dialogs.get(dialogs.size() - 1);
-				dlg.message += "\n" + line.substring(1, line.length());
-				dialogs.set(dialogs.size() - 1, dlg);
-			}
-			if(line.startsWith("|")) return;
-			dialogs.add(new Dialog(line));
+			parseContent(line);
 		}
 	}
 }

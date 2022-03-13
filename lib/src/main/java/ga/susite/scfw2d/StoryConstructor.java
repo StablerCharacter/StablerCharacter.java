@@ -28,30 +28,34 @@ public abstract class StoryConstructor {
 
     public abstract void buildContent();
 
+    public void finalizeBranch() {
+        if(dialogs.isEmpty()) {
+            throw new NullPointerException("No dialogs is created in a branch.");
+        }
+        branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
+        dialogs = new ArrayList<Dialog>();
+    }
+
+    public void finalizeChapter() {
+        if(currentBranchName != null) {
+            finalizeBranch();
+        }
+        if(branches.isEmpty()) {
+            throw new NullPointerException("No branch is created in a chapter.");
+        }
+        chapters.add(new Chapter(branches, currentChapter.chapterName, currentChapter.chapterDescription));
+        branches = new HashMap<String, Branch>();
+    }
+
     public void chapter(String chapterName, String chapterDescription) {
         if(currentChapter != null) {
-            if(currentBranchName != null) {
-                if(dialogs.isEmpty()) {
-                    throw new NullPointerException("No dialogs is created in a branch.");
-                }
-                branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
-                dialogs = new ArrayList<Dialog>();
-            }
-            if(branches.isEmpty()) {
-                throw new NullPointerException("No branch is created in a chapter.");
-            }
-            chapters.add(new Chapter(branches, currentChapter.chapterName, currentChapter.chapterDescription));
-            branches = new HashMap<String, Branch>();
+            finalizeChapter();
         }
         currentChapter = new ChapterInfo(chapterName, chapterDescription);
     }
     public void branch(String branchName) {
         if(currentBranchName != null) {
-            if(dialogs.isEmpty()) {
-                throw new NullPointerException("No dialogs is created in a branch.");
-            }
-            branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
-            dialogs = new ArrayList<Dialog>();
+            finalizeBranch();
         }
         currentBranchName = branchName;
     }
@@ -60,18 +64,7 @@ public abstract class StoryConstructor {
     }
     public StoryManager finalizeStory() {
         if(currentChapter != null) {
-            if(currentBranchName != null) {
-                if(dialogs.isEmpty()) {
-                    throw new NullPointerException("No dialogs is created in a branch.");
-                }
-                branches.put(currentBranchName, new Branch(dialogs.toArray(new Dialog[0])));
-                dialogs = new ArrayList<Dialog>();
-            }
-            if(branches.isEmpty()) {
-                throw new NullPointerException("No branch is created in a chapter.");
-            }
-            chapters.add(new Chapter(branches, currentChapter.chapterName, currentChapter.chapterDescription));
-            branches = new HashMap<String, Branch>();
+            finalizeChapter();
         }
         return new StoryManager(chapters.toArray(new Chapter[0]));
     }
