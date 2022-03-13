@@ -36,7 +36,7 @@ public class MainMenuScene extends Scene {
 	public void load(FastJCanvas canvas) {
 		Pointf titlePos = canvas.getCanvasCenter();
 		titlePos.y = 40;
-		drawableManager.addGameObject(titleInfo.build(GameManager.gameName, titlePos));
+		drawableManager.addGameObject(titleInfo.build(GameManager.get().gameName, titlePos));
 		Pointf buttonPos = canvas.getCanvasCenter();
 		buttonPos.y = 80;
 		playButtonInfo.build(this, "Play", buttonPos.copy(), event -> playGame());

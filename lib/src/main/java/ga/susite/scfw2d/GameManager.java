@@ -105,7 +105,7 @@ public class GameManager extends SceneManager {
 		if(scenes.size() == 0) {
 			scenes.add(new GameScene(dialogTextInfo.font, dialogTextInfo));
 		}
-		if(optionDialog == OptionDialogOption.enabled) {
+		if(optionDialog == OptionDialogOption.ENABLED) {
 			DialogUtil.showOptionDialog(
 				DialogConfig.create()
 					.withTitle("Options")

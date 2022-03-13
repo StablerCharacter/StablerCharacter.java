@@ -57,7 +57,7 @@ public class GameScene extends Scene {
 		}
 		mainFont = nMainFont;
 		dialogTextInfo = nDialogTextInfo;
-		story = GameManager.story;
+		story = GameManager.get().story;
 		executor = Executors.newSingleThreadExecutor();
 	}
 	
