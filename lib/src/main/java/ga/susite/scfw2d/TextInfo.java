@@ -62,10 +62,21 @@ public class TextInfo {
 	
 	/**
 	 * Set the color of the text.
+	 * @param newColor The new color.
 	 * @return The current instance. (Allowing chaining)
 	 */
 	public TextInfo withColor(Color newColor) {
 		this.color = newColor;
+		return this;
+	}
+	
+	/**
+	 * Set the font of the text.
+	 * @param newFont The new target font.
+	 * @return The current instance.
+	 */
+	public TextInfo withFont(Font newFont) {
+		font = newFont;
 		return this;
 	}
 	 

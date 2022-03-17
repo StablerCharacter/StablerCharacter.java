@@ -10,8 +10,8 @@ import tech.fastj.math.Pointf;
 import tech.fastj.systems.control.Scene;
 
 /**
- * @author lines-of-codes
  * A class that stores informations about a button.
+ * @author lines-of-codes
  */
 public class ButtonInfo {
 	/**
@@ -23,7 +23,7 @@ public class ButtonInfo {
 	/**
 	 * The fill color of the button.
 	 */
-	public Color fillColor = Color.BLACK;
+	public Color fillColor = Color.WHITE;
 	/**
 	 * The font of the text.
 	 */
@@ -69,15 +69,21 @@ public class ButtonInfo {
 	 * @param defaultText The default text of the button if there is no label.
 	 * @param defaultButtonPos The default button position.
 	 * @param onClickAction The action to be performed when the button is clicked.
+	 * @param xCentered Tells if you wanted to center the button horizontally.
 	 */
-	public void build(Scene origin, String defaultText, Pointf defaultButtonPos, Consumer<MouseButtonEvent> onClickAction) {
+	public void build(Scene origin, String defaultText, Pointf defaultButtonPos, Consumer<MouseButtonEvent> onClickAction, boolean xCentered) {
 		if(label == null) label = defaultText;
-		if(buttonPos == null) buttonPos = defaultButtonPos;
-		new Button(origin)
-				.setFont(font)
-				.setText(label)
-				.setFill(fillColor)
-				.addOnAction(onClickAction)
-				.translate(buttonPos);
+		Button button = new Button(origin);
+		button.setFont(font);
+		button.setText(label);
+		button.setFill(fillColor);
+		button.addOnAction(onClickAction);
+		if(buttonPos == null)
+			buttonPos = defaultButtonPos;
+		if(xCentered) {
+			Pointf[] bounds = button.getBounds();
+			buttonPos.x -= (bounds[1].x - bounds[0].x) / 2;
+			button.translate(buttonPos);
+		} else button.translate(buttonPos);
 	}
 }

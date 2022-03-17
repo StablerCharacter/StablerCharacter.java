@@ -3,7 +3,6 @@ package ga.susite.scfw2d;
 import tech.fastj.engine.FastJEngine;
 import tech.fastj.graphics.display.FastJCanvas;
 import tech.fastj.graphics.game.Text2D;
-import tech.fastj.graphics.ui.elements.Button;
 import tech.fastj.input.keyboard.Keyboard;
 import tech.fastj.input.keyboard.Keys;
 import tech.fastj.math.Point;
@@ -32,10 +31,34 @@ public class GameScene extends Scene {
 	 * Used internally in events.
 	 */
 	public static DrawableManager drawableManagerInstance;
+	/**
+	 * The main default font used in the game.
+	 */
 	Font mainFont;
 	TextInfo dialogTextInfo;
 	Text2D dialogText;
+	ButtonInfo nextButtonInfo = new ButtonInfo();
 	StoryManager story;
+	FastJCanvas canvas;
+	/**
+	 * The background color of the scene.
+	 */
+	Color backgroundColor = Color.WHITE;
+
+	public Color getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	public void setBackgroundColor(Color backgroundColor) {
+		this.backgroundColor = backgroundColor;
+		if(canvas != null) canvas.setBackgroundColor(backgroundColor);
+	}
+
+	public GameScene withBackgroundColor(Color backgroundColor) {
+		setBackgroundColor(backgroundColor);
+		return this;
+	}
+
 	/**
 	 * The screen center. Highly used internally.
 	 */
@@ -48,7 +71,7 @@ public class GameScene extends Scene {
 	 * @param nDialogTextInfo The text information about the dialog text.
 	 */
 	public GameScene(Font nMainFont, TextInfo nDialogTextInfo) {
-		super("Game scene");
+		super("GameScene");
 		if(nDialogTextInfo == null) {
 			nDialogTextInfo = new TextInfo();
 		}
@@ -84,7 +107,7 @@ public class GameScene extends Scene {
 			try {
 				TimeUnit.MILLISECONDS.sleep(dialogTextInfo.textAnimationInterval);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				FastJEngine.warning("InterruptedException received.");
 			}
 		}
 	}
@@ -117,14 +140,18 @@ public class GameScene extends Scene {
 
 	@Override
 	public void load(FastJCanvas canvas) {
+		canvas.setBackgroundColor(backgroundColor);
+		this.canvas = canvas;
 		Point displayRes = canvas.getResolution();
+
+		nextButtonInfo.build(
+			this, 
+			"Next", 
+			new Pointf(displayRes.x - 125, displayRes.y - 70), 
+			event -> nextDialog(canvas.getCanvasCenter()), 
+			false
+		);
 		
-		new Button(this)
-			.setFont(mainFont)
-			.setText("Next")
-			.setFill(Color.GRAY)
-			.addOnAction(event -> nextDialog(canvas.getCanvasCenter()))
-			.translate(new Pointf(displayRes.x - 125, displayRes.y - 70));
 		
 		dialogText = dialogTextInfo.build("", canvas.getCanvasCenter());
 		drawableManager.addGameObject(dialogText);

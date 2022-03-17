@@ -1,24 +1,23 @@
 package ga.susite.scfw2d.events;
 
-import tech.fastj.systems.audio.AudioManager;
-
-import java.nio.file.Path;
+import ga.susite.scfw2d.AudioLoader;
 
 /**
  * Plays an audio when a dialog is reached.
+ * @author lines-of-codes
  */
 public class AudioEvent implements Event {
-	Path audioPath;
-	
+	String audioName;
+
 	/**
-	 * @param audioPath The path of the audio.
+	 * @param targetAudio The name of the target audio in the AudioLoader class.
 	 */
-	public AudioEvent(Path audioPath) {
-		this.audioPath = audioPath;
+	public AudioEvent(String targetAudio) {
+		audioName = targetAudio;
 	}
 	
 	public void onActionTriggered() {
-		AudioManager.playSound(audioPath);
+		AudioLoader.getAudio(audioName).play();
 	}
 
 	public String getEventName() {

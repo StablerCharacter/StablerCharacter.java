@@ -162,6 +162,19 @@ public class GameManager extends SceneManager {
 		this.loadCurrentScene();
 	}
 
+	/**
+	 * Loads a scene from its name.
+	 * @param name The name of the scene.
+	 */
+	public void loadScene(String name) {
+		for(int i = 0; i < scenes.size(); i++) {
+			if(scenes.get(i).getSceneName().equals(name)) {
+				loadScene(i);
+				break;
+			}
+		}
+	}
+
 	@Override
 	public void init(FastJCanvas display) {
 		if(antiAliasing) {

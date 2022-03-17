@@ -9,7 +9,7 @@ public class EventArgs<T> {
 	 */
 	public static final EventArgs<Void> none = new EventArgs<Void>(null);
 	
-	T data;
+	public T data;
 	
 	/**
 	 * Initialize a new event argument with the given data.
