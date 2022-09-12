@@ -2,6 +2,9 @@ package ga.susite.scfw2d;
 
 import tech.fastj.engine.FastJEngine;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The story branch. Stores dialogs.
  */
@@ -9,7 +12,7 @@ public class Branch {
 	/**
 	 * The current dialog the branch is on.
 	 */
-	public int dialogIndex = 0;
+	@Getter @Setter private int dialogIndex = 0;
 	Dialog[] dialogs;
 	
 	/**
@@ -23,7 +26,7 @@ public class Branch {
 	public Branch(Dialog[] nDialogs) {
 		dialogs = nDialogs;
 	}
-	
+
 	/**
 	 * Advance to the next dialog.
 	 */
@@ -57,11 +60,15 @@ public class Branch {
 		return dialogs.length;
 	}
 
-	public boolean equals(Branch other) {
-		if(dialogIndex != other.dialogIndex) return false;
-		if(dialogs.length != other.dialogs.length) return false;
+	@Override
+	public boolean equals(Object other) {
+		if(this == other) return true;
+		if(other == null || getClass() != other.getClass()) return false;
+		Branch branch = (Branch)other;
+		if(dialogIndex != branch.dialogIndex) return false;
+		if(dialogs.length != branch.dialogs.length) return false;
 		for(int i = 0; i < dialogs.length; i++) {
-			if(!dialogs[i].equals(other.dialogs[i])) return false;
+			if(!dialogs[i].equals(branch.dialogs[i])) return false;
 		}
 		return true;
 	}

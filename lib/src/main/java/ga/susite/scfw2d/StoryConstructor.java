@@ -28,9 +28,9 @@ class ChapterInfo {
  * @author lines-of-codes
  */
 public abstract class StoryConstructor {
-    ArrayList<Chapter> chapters      = new ArrayList<Chapter>();
-    HashMap<String, Branch> branches = new HashMap<String, Branch>();
-    ArrayList<Dialog> dialogs        = new ArrayList<Dialog>();
+    ArrayList<Chapter> chapters      = new ArrayList<>();
+    HashMap<String, Branch> branches = new HashMap<>();
+    ArrayList<Dialog> dialogs        = new ArrayList<>();
     ChapterInfo currentChapter;
     String currentBranchName;
 

@@ -15,6 +15,10 @@ import tech.fastj.systems.control.Scene;
 import tech.fastj.systems.control.SceneManager;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * TManages the game.
@@ -65,24 +69,24 @@ public class GameManager extends SceneManager {
 	/**
 	 * An event triggered when the game manager is initialized.
 	 */
-	public static MethodEvent<Void> onInit = new MethodEvent<Void>();
+	public static MethodEvent<Void> onInit = new MethodEvent<>();
 	/**
 	 * An event triggered when the game update loop is being called.
 	 */
-	public static MethodEvent<EventData> onUpdate = new MethodEvent<EventData>();
+	public static MethodEvent<EventData> onUpdate = new MethodEvent<>();
 	/**
 	 * An event triggered when the story ended.
 	 */
-	public static MethodEvent<EventData> onStoryEnd = new MethodEvent<EventData>();
+	public static MethodEvent<EventData> onStoryEnd = new MethodEvent<>();
 	/**
 	 * An event triggered when the story started. (The first dialog appeared)
 	 */
-	public static MethodEvent<EventData> onStoryStart = new MethodEvent<EventData>();
+	public static MethodEvent<EventData> onStoryStart = new MethodEvent<>();
 	
 	/**
 	 * The scenes in the game.
 	 */
-	public static ArrayList<Scene> scenes = new ArrayList<Scene>();
+	public static List<Scene> scenes = new ArrayList<Scene>();
 	
 	private static GameManager instance;
 	
@@ -102,7 +106,7 @@ public class GameManager extends SceneManager {
 	 * Initializes the game.
 	 */
 	public void start() {
-		if(scenes.size() == 0) {
+		if(scenes.isEmpty()) {
 			scenes.add(new GameScene(dialogTextInfo.font, dialogTextInfo));
 		}
 		if(optionDialog == OptionDialogOption.ENABLED) {

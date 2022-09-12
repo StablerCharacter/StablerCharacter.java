@@ -15,7 +15,7 @@ public class Events {
 	 * Initialize an empty list of events.
 	 */
 	public Events() {
-		events = new ArrayList<Event>();
+		events = new ArrayList<>();
 	}
 	
 	/**
@@ -35,10 +35,14 @@ public class Events {
 		}
 	}
 
-	public boolean equals(Events other) {
-		if(events.size() != other.events.size()) return false;
-		for(int i = 0; i < events.size(); i++) {
-			if(!events.get(i).getEventName().equals(other.events.get(i).getEventName())) return false;
+	public boolean equals(Object other) {
+		if(this == other) return true;
+		if(other == null || getClass() != other.getClass()) return false;
+
+		Events events = (Events)other;
+		if(this.events.size() != events.events.size()) return false;
+		for(int i = 0; i < this.events.size(); i++) {
+			if(!this.events.get(i).getEventName().equals(events.events.get(i).getEventName())) return false;
 		}
 		return true;
 	}

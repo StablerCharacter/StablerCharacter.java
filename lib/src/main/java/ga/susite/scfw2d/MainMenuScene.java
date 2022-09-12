@@ -63,7 +63,7 @@ public class MainMenuScene extends Scene {
 		Point size = canvas.getResolution();
 		Pointf titlePos = canvas.getCanvasCenter();
 		titlePos.y = titlePos.y - size.y / 3;
-		drawableManager.addGameObject(titleInfo.build(GameManager.get().gameName, titlePos));
+		drawableManager().addGameObject(titleInfo.build(GameManager.get().gameName, titlePos));
 		Pointf buttonPos = canvas.getCanvasCenter();
 		buttonPos.y = titlePos.y + size.y / 4;
 		playButtonInfo.build(this, "Play", buttonPos.copy(), event -> playGame(), true);

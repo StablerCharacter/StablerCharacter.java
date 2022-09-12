@@ -10,6 +10,7 @@
 module ga.susite.scfw2d {
     requires transitive fastj.library;
     requires transitive java.desktop;
+    requires lombok;
     exports ga.susite.scfw2d;
     exports ga.susite.scfw2d.events;
     exports ga.susite.scfw2d.utils;

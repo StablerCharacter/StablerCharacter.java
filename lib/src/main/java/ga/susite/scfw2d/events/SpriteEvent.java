@@ -35,25 +35,7 @@ public class SpriteEvent implements Event {
 
 	@Override
 	public void onActionTriggered() {
-		System.out.println("test");
-		try {
-			Sprite2D sprite = Sprite2D.create(new ImageResource(imagePath)).build();
-			System.out.print("Before sprite.scale(2): ");
-			System.out.println(Objects.requireNonNull(sprite.getBounds()));
-			sprite.scale(2);
-			System.out.print("After sprite.scale(2): ");
-			System.out.println(Objects.requireNonNull(sprite.getBounds()));
-			if(position != null) sprite.translate(position);
-			else {
-				Pointf screenCenter = GameScene.screenCenter.copy();
-				Pointf[] bounds = sprite.getBounds();
-				screenCenter.x -= (bounds[1].x - bounds[0].x) / 2;
-				sprite.setTranslation(screenCenter);
-			}
-			GameScene.drawableManagerInstance.addGameObject(sprite);
-		} finally {
-			System.out.println("something else");
-		}
+		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 
 	@Override

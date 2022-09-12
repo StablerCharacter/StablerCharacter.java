@@ -57,10 +57,10 @@ public class OptionDialog extends JPanel {
 			new BeautifulPoint(1280, 720),
 			new BeautifulPoint(1920, 1080)
 		};
-		JComboBox<Point> resDropdown = new JComboBox<Point>(resolutions);
-		resDropdown.addActionListener(e -> {
-			GameManager.gameWindowResolution = (Point)resDropdown.getSelectedItem();
-		});
+		JComboBox<Point> resDropdown = new JComboBox<>(resolutions);
+		resDropdown.addActionListener(
+			e -> GameManager.gameWindowResolution = (Point)resDropdown.getSelectedItem()
+		);
 		resDropdown.setFont(segoe);
 		resolutionOption.add(resDropdown);
 		this.add(resolutionOption);
@@ -73,7 +73,7 @@ public class OptionDialog extends JPanel {
 		renderingQuality.add(qualityDropdownLabel);
 		
 		String[] qualityLabelList = {"Low", "High"};
-		JComboBox<String> qualityDropdown = new JComboBox<String>(qualityLabelList);
+		JComboBox<String> qualityDropdown = new JComboBox<>(qualityLabelList);
 		qualityDropdown.setSelectedIndex(1);
 		qualityDropdown.setAlignmentX(Component.CENTER_ALIGNMENT);
 		qualityDropdown.setFont(segoe);
@@ -92,9 +92,9 @@ public class OptionDialog extends JPanel {
 		aaCheckbox.setFont(segoe);
 		aaCheckbox.setSelected(true);
 		aaCheckbox.setAlignmentX(Component.CENTER_ALIGNMENT);
-		aaCheckbox.addActionListener(e -> {
-			GameManager.get().antiAliasing = aaCheckbox.isSelected();
-		});
+		aaCheckbox.addActionListener(
+			e -> GameManager.get().antiAliasing = aaCheckbox.isSelected()
+		);
 		this.add(aaCheckbox);
 	}
 }

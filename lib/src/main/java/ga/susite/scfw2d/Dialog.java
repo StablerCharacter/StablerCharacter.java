@@ -3,6 +3,9 @@ package ga.susite.scfw2d;
 import ga.susite.scfw2d.events.Event;
 import ga.susite.scfw2d.events.Events;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The dialog class. Used for displaying dialogs.
  */
@@ -10,11 +13,11 @@ public class Dialog {
 	/**
 	 * The content of the dialog.
 	 */
-	public String message = "";
+	@Getter @Setter String message = "";
 	/**
 	 * All of the actions that is going to be triggered in the dialog.
 	 */
-	public Events events;
+	@Getter @Setter Events events;
 	
 	/**
 	 * Initialize a new dialog with the specified text.
@@ -34,9 +37,11 @@ public class Dialog {
 		events = new Events(nEvents);
 	}
 
-	public boolean equals(Dialog other) {
-		if(!message.equals(other.message)) return false;
-		if(events != null && !events.equals(other.events)) return false;
-		return true;
+	public boolean equals(Object other) {
+		if(this == other) return true;
+		if(other == null || getClass() != other.getClass()) return false;
+		Dialog dialog = (Dialog)other;
+		if(!message.equals(dialog.message)) return false;
+		return events.equals(dialog.events);
 	}
 }

@@ -3,9 +3,13 @@ package ga.susite.scfw2d;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import tech.fastj.engine.FastJEngine;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Represents a chapter of a game. Stores branches.
@@ -14,23 +18,23 @@ public class Chapter {
 	/**
 	 * The chapter name.
 	 */
-	public String name;
+	@Getter @Setter String name;
 	/**
 	 * The chapter description.
 	 */
-	public String description;
+	@Getter @Setter String description;
 	/**
 	 * The name of the entry branch.
 	 */
-	public String currentBranchName = "main";
-	HashMap<String, Branch> branches;
+	@Getter @Setter String currentBranchName = "main";
+	Map<String, Branch> branches;
 	
 	/**
 	 * @param nBranches The HashMap of the branches. Structured in a branchName:value structure.
 	 * @param nName The chapter name.
 	 * @param nDescription The chapter description.
 	 */
-	public Chapter(HashMap<String, Branch> nBranches, String nName, String nDescription) {
+	public Chapter(Map<String, Branch> nBranches, String nName, String nDescription) {
 		branches = nBranches;
 		name = nName;
 		description = nDescription;
@@ -64,7 +68,7 @@ public class Chapter {
 	 * @return The current dialog index.
 	 */
 	public int getDialogIndex() {
-		return branches.get(currentBranchName).dialogIndex;
+		return branches.get(currentBranchName).getDialogIndex();
 	}
 	
 	/**
@@ -72,7 +76,7 @@ public class Chapter {
 	 * @param index The target dialog index.
 	 */
 	public void setDialogIndex(int index) {
-		branches.get(currentBranchName).dialogIndex = index;
+		branches.get(currentBranchName).setDialogIndex(index);
 	}
 	
 	/*
@@ -94,23 +98,29 @@ public class Chapter {
 		return branches.get(currentBranchName).getThisBranchLength();
 	}
 
-	public boolean equals(Chapter other) {
-		if(!name.equals(other.name)) return false;
-		if(!description.equals(other.description)) return false;
-		if(!currentBranchName.equals(other.currentBranchName)) return false;
-		if(branches.size() != other.branches.size()) return false;
+	@Override
+	public boolean equals(Object other) {
+		if(this == other) return true;
+		if(other == null || getClass() != other.getClass()) return false;
+		
+		Chapter chapter = (Chapter)other;
+
+		if(!name.equals(chapter.name)) return false;
+		if(!description.equals(chapter.description)) return false;
+		if(!currentBranchName.equals(chapter.currentBranchName)) return false;
+		if(branches.size() != chapter.branches.size()) return false;
+		
 		final Set<Entry<String, Branch>> branchEntries = branches.entrySet();
-		final Set<Entry<String, Branch>> otherBranchEntries = other.branches.entrySet();
-		ArrayList<Boolean> branchEquals = new ArrayList<Boolean>();
-		branchEntries.forEach(entry -> {
+		final Set<Entry<String, Branch>> otherBranchEntries = chapter.branches.entrySet();
+		ArrayList<Boolean> branchEquals = new ArrayList<>();
+		branchEntries.forEach(entry -> 
 			otherBranchEntries.forEach(otherEntry -> {
 				if(otherEntry.getKey().equals(entry.getKey()) &&
 					entry.getValue().equals(otherEntry.getValue())) {
 					branchEquals.add(true);
 				}
-			});
-		});
-		if(branchEquals.size() != branches.size()) return false;
-		return true;
+			})
+		);
+		return branchEquals.size() == branches.size();
 	}
 }

@@ -3,6 +3,7 @@ package ga.susite.scfw2d;
 import java.nio.file.Path;
 import java.util.HashMap;
 
+import tech.fastj.engine.FastJEngine;
 import tech.fastj.systems.audio.Audio;
 import tech.fastj.systems.audio.AudioManager;
 import tech.fastj.systems.audio.MemoryAudio;
@@ -15,6 +16,7 @@ import tech.fastj.systems.audio.StreamedAudio;
 public class AudioLoader {
     static HashMap<String, MemoryAudio> memoryAudioMap = new HashMap<String, MemoryAudio>();
     static HashMap<String, StreamedAudio> streamedAudioMap = new HashMap<String, StreamedAudio>();
+    static AudioManager audioManager = FastJEngine.getAudioManager();
 
     /**
      * Load an audio file.
@@ -24,9 +26,9 @@ public class AudioLoader {
      */
     public static void loadAudio(String name, Path audioPath, AudioLoadType loadType) {
         if(loadType == AudioLoadType.MEMORY) {
-            memoryAudioMap.put(name, AudioManager.loadMemoryAudio(audioPath));
+            memoryAudioMap.put(name, audioManager.loadMemoryAudio(audioPath));
         } else if(loadType == AudioLoadType.STREAMED) {
-            streamedAudioMap.put(name, AudioManager.loadStreamedAudio(audioPath));
+            streamedAudioMap.put(name, audioManager.loadStreamedAudio(audioPath));
         }
     }
 
@@ -37,10 +39,10 @@ public class AudioLoader {
      */
     public static void unloadAudio(String name, AudioLoadType loadType) {
         if(loadType == AudioLoadType.MEMORY) {
-            AudioManager.unloadMemoryAudio(memoryAudioMap.get(name).getID());
+            audioManager.unloadMemoryAudio(memoryAudioMap.get(name).getID());
             memoryAudioMap.remove(name);
         } else if(loadType == AudioLoadType.STREAMED) {
-            AudioManager.unloadStreamedAudio(streamedAudioMap.get(name).getID());
+            audioManager.unloadStreamedAudio(streamedAudioMap.get(name).getID());
             streamedAudioMap.remove(name);
         }
     }

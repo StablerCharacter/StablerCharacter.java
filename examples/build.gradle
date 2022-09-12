@@ -8,8 +8,8 @@ group("ga.susite.scfw2d")
 version('1.0.0')
 description("Example programs for the StablerCharacter.java game engine.")
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 18
+targetCompatibility = 18
 
 java {
     withSourcesJar()
@@ -24,7 +24,7 @@ repositories {
 dependencies {
     implementation(project(':lib'))
     implementation("org.slf4j:slf4j-simple:2.0.0-alpha5")
-    implementation("com.github.fastjengine:FastJ:1.6.0")
+    implementation("io.github.lucasstarsz.fastj:fastj-library:1.7.0-SNAPSHOT-2")
 }
 
 sourceSets {
@@ -51,8 +51,9 @@ task run(type: Exec) {
     description = 'Runs an example program.'
     group = 'Execution'
 
+
     commandLine(
-        'java',
+        "${environment.get("JAVA_HOME")}bin/java",
         '-classpath', sourceSets.main.runtimeClasspath.getAsPath(),
         "ga.susite.scfw2d.examples.${project.hasProperty("example") ? project.getProperty("example") : ''}.Main"
     )

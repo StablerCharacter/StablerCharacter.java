@@ -6,17 +6,17 @@ import java.util.function.Function;
 /**
  * This is a Utility class for a simple events system.
  * @author lines-of-codes
- * @param <EventArgsType> The type of the EventArgs that will be provided to the subscribers method.
+ * @param <T> The type of the EventArgs that will be provided to the subscribers method.
  */
-public class MethodEvent<EventArgsType> {
-	ArrayList<Function<EventArgs<EventArgsType>, Void>> subscribers = new ArrayList<Function<EventArgs<EventArgsType>, Void>>();
+public class MethodEvent<T> {
+	ArrayList<Function<EventArgs<T>, Void>> subscribers = new ArrayList<>();
 	
 	/**
 	 * Invoke all of the subscribers.
 	 * @param eventArgs The event argument to provide for the subscribers.
 	 */
-	public void invoke(EventArgs<EventArgsType> eventArgs) {
-		for(Function<EventArgs<EventArgsType>, Void> subscriber : subscribers) {
+	public void invoke(EventArgs<T> eventArgs) {
+		for(Function<EventArgs<T>, Void> subscriber : subscribers) {
 			subscriber.apply(eventArgs);
 		}
 	}
@@ -25,7 +25,7 @@ public class MethodEvent<EventArgsType> {
 	 * Add a subscriber.
 	 * @param subscriber The subscriber to add.
 	 */
-	public void addEventListener(Function<EventArgs<EventArgsType>, Void> subscriber) {
+	public void addEventListener(Function<EventArgs<T>, Void> subscriber) {
 		subscribers.add(subscriber);
 	}
 	
@@ -34,8 +34,8 @@ public class MethodEvent<EventArgsType> {
 	 * @param subscribers The subscribers to add.
 	 */
 	@SuppressWarnings("unchecked")
-	public void addEventListeners(Function<EventArgs<EventArgsType>, Void>... subscribers) {
-		for(Function<EventArgs<EventArgsType>, Void> subscriber : subscribers) {
+	public void addEventListeners(Function<EventArgs<T>, Void>... subscribers) {
+		for(Function<EventArgs<T>, Void> subscriber : subscribers) {
 			addEventListener(subscriber);
 		}
 	}

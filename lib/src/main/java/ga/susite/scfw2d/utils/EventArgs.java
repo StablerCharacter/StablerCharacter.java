@@ -7,7 +7,7 @@ public class EventArgs<T> {
 	/**
 	 * The empty EventArgs.
 	 */
-	public static final EventArgs<Void> none = new EventArgs<Void>(null);
+	public static final EventArgs<Void> none = new EventArgs<>(null);
 	
 	public T data;
 	

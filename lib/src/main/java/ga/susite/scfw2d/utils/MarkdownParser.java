@@ -18,12 +18,12 @@ import tech.fastj.engine.FastJEngine;
  * A basic parser used for parsing (a modified version of) Markdown as a StoryManager.
  */
 public class MarkdownParser {
-	ArrayList<Chapter> chapters = new ArrayList<Chapter>();
+	ArrayList<Chapter> chapters = new ArrayList<>();
 	String currentChapter = null;
 	String currentChapterDescription = "";
 	String currentBranchName = null;
-	HashMap<String, Branch> branches = new HashMap<String, Branch>();
-	List<Dialog> dialogs = new ArrayList<Dialog>();
+	HashMap<String, Branch> branches = new HashMap<>();
+	List<Dialog> dialogs = new ArrayList<>();
 	
 	/**
 	 * Parse a file.
@@ -88,7 +88,7 @@ public class MarkdownParser {
 		}
 		if(line.startsWith("|")) {
 			Dialog dlg = dialogs.get(dialogs.size() - 1);
-			dlg.message += "\n" + line.substring(1, line.length());
+			dlg.setMessage(dlg.getMessage() + "\n" + line.substring(1, line.length()));
 			dialogs.set(dialogs.size() - 1, dlg);
 		}
 		if(line.startsWith("|")) return;

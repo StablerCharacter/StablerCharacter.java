@@ -27,11 +27,6 @@ public class GameScene extends Scene {
 	 */
 	public static final SceneInfo SCENE_INFO = new SceneInfo("GameScene");
 	/**
-	 * The FastJ's DrawableManager instance.
-	 * Used internally in events.
-	 */
-	public static DrawableManager drawableManagerInstance;
-	/**
 	 * The main default font used in the game.
 	 */
 	Font mainFont;
@@ -90,7 +85,7 @@ public class GameScene extends Scene {
 	void nextDialogWithAnimation() {
 		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
 			FastJEngine.log("Story ended!");
-			GameManager.onStoryEnd.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
+			GameManager.onStoryEnd.invoke(new EventArgs<>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 			return;
 		}
 		Dialog dialog = story.getNext();
@@ -125,7 +120,7 @@ public class GameScene extends Scene {
 		}
 		if(story.getDialogIndex() + 1 >= story.getCurrentBranchLength()) {
 			FastJEngine.log("Story ended!");
-			GameManager.onStoryEnd.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
+			GameManager.onStoryEnd.invoke(new EventArgs<>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 			return;
 		}
 		Dialog dialog = story.getNext();
@@ -154,13 +149,12 @@ public class GameScene extends Scene {
 		
 		
 		dialogText = dialogTextInfo.build("", canvas.getCanvasCenter());
-		drawableManager.addGameObject(dialogText);
-		drawableManagerInstance = drawableManager;
+		drawableManager().addGameObject(dialogText);
 		FastJEngine.log("Starting story...");
 		story.setDialogIndex(-1);
 		nextDialog(canvas.getCanvasCenter());
 		FastJEngine.log("Invoking onStoryStart event...");
-		GameManager.onStoryStart.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
+		GameManager.onStoryStart.invoke(new EventArgs<>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 	}
 
 	@Override
@@ -174,6 +168,6 @@ public class GameScene extends Scene {
 			nextDialog(canvas.getCanvasCenter());
 		}
 		
-		GameManager.onUpdate.invoke(new EventArgs<EventData>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
+		GameManager.onUpdate.invoke(new EventArgs<>(new EventData(story.getCurrentDialog(), SCENE_INFO)));
 	}
 }

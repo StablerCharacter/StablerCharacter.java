@@ -29,7 +29,7 @@ public class Main {
         });
         // Triggered when the story is being started.
         GameManager.onStoryStart.addEventListener(eventArgs -> {
-            FastJEngine.log("Story started! The current name of the scene is " + eventArgs.data.currentScene.name);
+            FastJEngine.log("Story started! The current name of the scene is " + eventArgs.data.getCurrentScene().name);
             return null;
         });
         // This event is triggered when the story has ended.

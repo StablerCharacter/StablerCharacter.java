@@ -71,11 +71,15 @@ public class StoryManager {
 	}
 
 	public boolean equals(StoryManager other) {
-		if(chapters.length != other.chapters.length) return false;
+		if(this == other) return true;
+		if(other == null || getClass() != other.getClass()) return false;
+		
+		StoryManager storyManager = (StoryManager)other;
+		if(chapters.length != storyManager.chapters.length) return false;
 		for(int i = 0; i < chapters.length; i++) {
-			if(!chapters[i].equals(other.chapters[i])) return false;
+			if(!chapters[i].equals(storyManager.chapters[i])) return false;
 		}
-		if(!chapterIndex.equals(other.chapterIndex)) return false;
+		if(!chapterIndex.equals(storyManager.chapterIndex)) return false;
 		return true;
 	}
 }
